@@ -11,9 +11,10 @@ public class Partie {
 	private int[][] m_grille;
 	private int[] m_serpents;
 	private int m_vitesse;
-	//private Joueur[] m_joueurs;
+	private Joueur[] m_joueurs;
+	private int m_nombreJoueurs;
 	private boolean m_isPartieEnCours;  //true si la partie est déjà lancée
-	//private Ecran m_ecran;
+	private Ecran m_ecran;
 
 	public Partie(int uneVitesse)
 	{
@@ -28,6 +29,7 @@ public class Partie {
 		}
 		m_isPartieEnCours = false;
 		m_vitesse = uneVitesse;
+		m_nombresJoueurs = 0;
 	}
 
 	public void lancerPartie()
@@ -56,7 +58,7 @@ public class Partie {
 
 	}
 
-	private Boolean deplacerSerpent(KeyEvent e){
+	private Boolean deplacerSerpent(){
 
 	}
 
@@ -68,5 +70,9 @@ public class Partie {
 
 	public int getVitesse(){
 		return m_vitesse;
+	}
+
+	public int getNombresJoueurs(){
+		return m_nombreJoueurs;
 	}
 }
