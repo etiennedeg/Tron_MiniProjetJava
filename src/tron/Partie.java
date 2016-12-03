@@ -109,5 +109,20 @@ public class Partie {
 	{
 		return m_nombreJoueurs;
 	}
+	
+	public int[][] getGrille()
+	{
+		return m_grille;
+	}
+	
+	public int getGrille(int X, int Y)
+	{
+		return m_grille[X][Y];
+	}
+	
+	public void setGrille(int X, int Y, int uneValeur)
+	{
+		m_grille[X][Y] = uneValeur;
+	}
 }
 
