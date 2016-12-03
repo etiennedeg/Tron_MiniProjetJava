@@ -1,12 +1,31 @@
 
 public class Serpent {
 
-	public int[][] m_tete;
+	private String m_Couleur;
+	private int m_numero;
+	private int m_orientation;
+	private int m_teteX;
+	private int m_teteY;
 	
-	public m_tete(){
-		
+	public void Serpent(int unNumero,String uneCouleur){
+		m_numero=unNumero;
+		m_couleur=uneCouleur;
 	}
-	public Serpent(){
-		
+	
+	public int getTeteX(){
+		return m_teteX;
 	}
+	
+	public int getTeteY(){
+		return m_teteY;
+	}
+	
+	public boolean changerTeteX(int x,int y,int numSerpent){
+		m_teteX=x;
+		m_teteY=y;
+		if m_grille
+	}
+	
+	
+	
 }
