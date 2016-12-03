@@ -1,3 +1,5 @@
+package tron;
+
 import java.util.ArrayList;
 
 
@@ -43,11 +45,12 @@ public class Partie {
 				case 3: 
 					m_serpents.get(0).changerTete( (int) TAILLE_X / 2, (int) TAILLE_Y / 3);
 					m_serpents.get(1).changerTete( (int) TAILLE_X / 6, (int) 2 * TAILLE_Y / 3);
-					m_serpents.get(1).changerTete( (int) 5 * TAILLE_X / 6, (int) 2 * TAILLE_Y / 3);
+					m_serpents.get(2).changerTete( (int) 5 * TAILLE_X / 6, (int) 2 * TAILLE_Y / 3);
 				case 4:
-					m_serpents.get(0).changerTete( (int) TAILLE_X / 2, (int) TAILLE_Y / 3);
-					m_serpents.get(1).changerTete( (int) TAILLE_X / 6, (int) 2 * TAILLE_Y / 3);
-					m_serpents.get(1).changerTete( (int) 5 * TAILLE_X / 6, (int) 2 * TAILLE_Y / 3);
+					m_serpents.get(0).changerTete( (int) TAILLE_X / 3, (int) TAILLE_Y / 3);
+					m_serpents.get(1).changerTete( (int) TAILLE_X / 3, (int) 2 * TAILLE_Y / 3);
+					m_serpents.get(2).changerTete( (int) 2 * TAILLE_X / 3, (int)  TAILLE_Y / 3);
+					m_serpents.get(3).changerTete( (int) 2 * TAILLE_X / 3, 2 * (int)  TAILLE_Y / 3);
 		
 			}
 			jouerPartie();
