@@ -21,7 +21,7 @@ public class Serpent {
 		return m_teteY;
 	}
 	
-	public boolean changerTeteX(int x,int y,int numSerpent){
+	public boolean changerTete(int x,int y,int numSerpent){
 		m_teteX=x;
 		m_teteY=y;
 		int[][] uneGrille=.getGrill();
