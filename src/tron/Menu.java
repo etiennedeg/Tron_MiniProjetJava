@@ -51,7 +51,7 @@ class Controle implements ActionListener {
 		//m_menu.m_panelStart.remove(m_menu.m_ButtonDeConmmencer);;
 		//m_menu.m_panelStart.repaint();
 		JOptionPane.showInternalInputDialog(m_menu.m_ButtonDeConmmencer,"Combien de joueurs ? (2-4)");
-		System.exit(0);//lancerPartie ici !
+		System.exit(0);
 	}
 
 }
