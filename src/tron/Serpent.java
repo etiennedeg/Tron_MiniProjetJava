@@ -2,17 +2,19 @@ package tron;
 
 public class Serpent {
 
-	private String m_Couleur;
+	private String m_couleur;
 	private int m_numero;
 	private int m_orientation=0;
 	private int m_teteX=0;
 	private int m_score=0;
 	private int m_teteY=0;
 	private boolean m_isWin=false;
+	private Joueur m_joueur;
+	private Partie m_partie;
 	
 	public void Serpent(int unNumero,String uneCouleur){
 		m_numero=unNumero;
-		m_Couleur=uneCouleur;
+		m_couleur=uneCouleur;
 	}
 	
 	public int getTeteX(){
@@ -26,10 +28,10 @@ public class Serpent {
 	public boolean changerTete(int x,int y){
 		m_teteX=x;
 		m_teteY=y;
-		int[][] uneGrille=.getGrill();
-		if (uneGrille(x,y)==0)
+		int[][] uneGrille=m_partie.getGrille();
+		if (uneGrille[x][y]==0)
 		{
-			.setGrille(x,y,m_numero);
+			m_partie.setGrille(x,y,m_numero);
 			return false;
 		}else{
 			return true;
@@ -60,10 +62,14 @@ public class Serpent {
 				m_isWin=changerTete(x,y);
 			}
 		}
-		changerScore();
+		//changerScore();
 		if (getRes()==true){
-			stopperPartie();
+			m_partie.stopperPartie();
 		}
+	}
+	
+	public void setPartie(Partie unePartie){
+		m_partie=unePartie;
 	}
 	
 	public int getOrientation(){
@@ -77,10 +83,21 @@ public class Serpent {
 	public boolean getRes(){
 		return m_isWin;
 	}
-	
-	public void changerScore(){
+	public String getCouleur(){
+		return m_couleur;
+	}
+	public void setCouleur(String uneCouleur){
+		m_couleur=uneCouleur;
+	}
+	public Joueur getJoueur(){
+		return m_joueur;
+	}
+	public void setJoueur(Joueur uneJoueur){
+		m_joueur=uneJoueur;
+	}
+	/*public void changerScore(){
 		if (getRes()==true){
 			m_score=m_score+1;
 		}
-	}
+	}*/
 }

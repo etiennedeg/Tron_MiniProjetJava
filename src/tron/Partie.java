@@ -88,7 +88,7 @@ public class Partie {
 
 	}
 
-	private Boolean deplacerSerpent()
+	private void deplacerSerpent()
 	{
 
 	}

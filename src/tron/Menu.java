@@ -29,7 +29,7 @@ public class Menu extends JFrame{
 		m_ButtonDeConmmencer.setOpaque(false);
 		m_ButtonDeConmmencer.setContentAreaFilled(false);
 		m_panelStart.add(m_ButtonDeConmmencer);
-		m_ButtonDeConmmencer.addActionListener(new Controle(this));
+		m_ButtonDeConmmencer.addActionListener(new Control(this));
 		this.getContentPane().add(m_panelStart);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(imgBack.getIconWidth(), imgBack.getIconHeight());
@@ -42,9 +42,9 @@ public class Menu extends JFrame{
 	}
 
 }
-class Controle implements ActionListener {
+class Control implements ActionListener {
 	public Menu m_menu;
-	public Controle (Menu menu){
+	public Control (Menu menu){
 		m_menu = menu;
 	}
 	public void actionPerformed(ActionEvent e){
