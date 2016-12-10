@@ -52,7 +52,7 @@ class Control implements ActionListener {
 		int vitesse = Integer.parseInt(JOptionPane.showInputDialog("Choisissez une vitesse svp (from 1-100)"));
 		Partie p = new Partie(nombreJoueurs,vitesse);
 		p.lancerPartie();
-		System.exit(0);
+		//System.exit(0);
 	}
 
 }
