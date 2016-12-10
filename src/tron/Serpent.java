@@ -38,34 +38,29 @@ public class Serpent {
 		}
 	}
 	
-	public void deplacerSerpent(int uneOrientation){
-		if (java.lang.Math.abs(m_orientation-uneOrientation)!=2){
-			changerOrientation(uneOrientation);
+	public boolean deplacerSerpent(){
 			if(m_orientation==1){              //gauch
-				int x=m_teteX-10;
+				int x=m_teteX-1;
 				int y=m_teteY;
 				m_isWin=changerTete(x,y);
 			}
 			else if(m_orientation==2){              //haut
 				int x=m_teteX;
-				int y=m_teteY-10;
+				int y=m_teteY-1;
 				m_isWin=changerTete(x,y);
 			}
 			else if(m_orientation==3){              //droite
-				int x=m_teteX+10;
+				int x=m_teteX+1;
 				int y=m_teteY;
 				m_isWin=changerTete(x,y);
 			}
 			else if(m_orientation==4){              //bas
 				int x=m_teteX;
-				int y=m_teteY+10;
+				int y=m_teteY+1;
 				m_isWin=changerTete(x,y);
-			}
 		}
 		//changerScore();
-		if (getRes()==true){
-			m_partie.stopperPartie();
-		}
+		return m_isWin;
 	}
 	
 	public void setPartie(Partie unePartie){
@@ -77,7 +72,9 @@ public class Serpent {
 	}
 	
 	public void changerOrientation(int uneOrientation){
-		m_orientation=uneOrientation;
+		if (java.lang.Math.abs(m_orientation-uneOrientation)!=2){
+			m_orientation=uneOrientation;
+		}
 	}
 	
 	public boolean getRes(){
