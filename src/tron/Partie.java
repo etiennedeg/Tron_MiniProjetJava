@@ -14,22 +14,22 @@ public class Partie {
 	private ArrayList<Serpent> m_serpents;
 	private int m_vitesse;
 	private int m_nombreJoueurs;
-	private boolean m_isPartieEnCours;  //true si la partie est déjà  lancée
+	private boolean m_isPartieEnCours;  //true si la partie est dï¿½jï¿½ lancï¿½e
 	private Ecran m_ecran;
 	
-	public Partie(int uneVitesse){
+	public Partie(int unNombreJoueur, int uneVitesse){
 		m_nombresDeManches = 0;
 		m_partieThread = new PartieThread(this);
 		m_grille = new int[TAILLE_X][TAILLE_Y];
 		reinitialiserGrille();
 		m_isPartieEnCours = false;
 		m_vitesse = uneVitesse;
-		m_nombreJoueurs = 0;
+		m_nombreJoueurs = unNombreJoueur;
 	}
 
 	public void lancerPartie(){
 		if (m_nombreJoueurs <=1){
-			throw NombreJoueurInsuffisant; // exception a créer
+			throw NombreJoueurInsuffisant; // exception a crï¿½er
 		}
 		else{
 			m_isPartieEnCours = true;
