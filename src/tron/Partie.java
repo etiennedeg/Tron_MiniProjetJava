@@ -16,7 +16,7 @@ public class Partie {
 	private int m_nombreJoueurs;
 	private boolean m_isPartieEnCours;  //true si la partie est déjà  lancée
 	private Ecran m_ecran;
-
+	
 	public Partie(int uneVitesse){
 		m_nombresDeManches = 0;
 		m_partieThread = new PartieThread(this);
@@ -124,4 +124,5 @@ public class Partie {
 		m_grille[X][Y] = uneValeur;
 	}
 }
+
 
