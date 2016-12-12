@@ -1,41 +1,21 @@
 package tron;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Controle implements KeyListener{
+import javax.swing.JOptionPane;
 
-	Serpent m_serpent;
-	public void keyPressed(KeyEvent e) {
-        int code=e.getKeyCode();
-        
-        if(code==KeyEvent.VK_UP){
-            m_serpent.changerOrientation(2);           
-        }
-         
-        else if(code==KeyEvent.VK_RIGHT){
-        	m_serpent.changerOrientation(3);
-        }
-         
-        else if(code==KeyEvent.VK_DOWN){
-        	m_serpent.changerOrientation(4);
-        }  
-        else if(code==KeyEvent.VK_LEFT){
-        	m_serpent.changerOrientation(1);
-        }
-         
+public class Controle implements ActionListener {
+	public Menu m_menu;
+	public Controle (Menu menu){
+		m_menu = menu;
 	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e){
+		int nombreJoueurs = Integer.parseInt(JOptionPane.showInputDialog("Combien de joueurs ? (2-4)"));
+		int vitesse = Integer.parseInt(JOptionPane.showInputDialog("Choisissez une vitesse svp (from 1-100)"));
+		Partie p = new Partie(nombreJoueurs,vitesse);
+		//p.lancerPartie(); le grille n'est pas bien initialise , je pense que les serpents doivent etre initialise dans la constructeur de Partie
+		this.m_menu.dispose();
+		p.m_ecran = new Ecran(p);
 	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

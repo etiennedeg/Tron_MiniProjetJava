@@ -29,7 +29,7 @@ public class Menu extends JFrame{
 		m_ButtonDeConmmencer.setOpaque(false);
 		m_ButtonDeConmmencer.setContentAreaFilled(false);
 		m_panelStart.add(m_ButtonDeConmmencer);
-		m_ButtonDeConmmencer.addActionListener(new Control(this));
+		m_ButtonDeConmmencer.addActionListener(new Controle(this));
 		this.getContentPane().add(m_panelStart);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(imgBack.getIconWidth(), imgBack.getIconHeight());
@@ -42,18 +42,4 @@ public class Menu extends JFrame{
 	}
 
 }
-class Control implements ActionListener {
-	public Menu m_menu;
-	public Control (Menu menu){
-		m_menu = menu;
-	}
-	public void actionPerformed(ActionEvent e){
-		int nombreJoueurs = Integer.parseInt(JOptionPane.showInputDialog("Combien de joueurs ? (2-4)"));
-		int vitesse = Integer.parseInt(JOptionPane.showInputDialog("Choisissez une vitesse svp (from 1-100)"));
-		Partie p = new Partie(nombreJoueurs,vitesse);
-		p.lancerPartie();
-		this.m_menu.dispose();
-		p.m_ecran = new Ecran(p);
-	}
 
-}
