@@ -19,19 +19,21 @@ public class Ecran extends JFrame{
 	public Ecran(Partie unePartie){
 		super("Tron");
 		m_partie = unePartie;
-		imgBack = Toolkit.getDefaultToolkit().getImage("board.jpg");
-
+		ImageIcon imgBack = new ImageIcon("background.png");
+		JLabel backGround = new JLabel(imgBack);
+		backGround.setBounds(0,0, imgBack.getIconWidth(), imgBack.getIconHeight());		
+		this.getLayeredPane().add(backGround , new Integer(Integer.MIN_VALUE));
+		((JPanel)this.getContentPane()).setOpaque(false);
+		//imgBack.Width = imgBack.Height = 734
+		m_MargeW = (imgBack.getIconWidth()-5*this.m_partie.TAILLE_X)/2;
+		m_MargeH = (imgBack.getIconHeight()-5*this.m_partie.TAILLE_Y)/2;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(imgBack.getIconWidth(), imgBack.getIconHeight());
 		this.setVisible(true);
 	}
-	   public Dimension getPreferredSize(){  
-	       return new Dimension(m_MargeW*2+20*this.m_partie.TAILLE_X , m_MargeH*2+20*this.m_partie.TAILLE_Y);  
-	   }
 	public void paint(Graphics unG){
 		super.paint(unG);
-		m_MargeW = (imgBack.getWidth(this)-20*this.m_partie.TAILLE_X)/2;
-		m_MargeH = (imgBack.getWidth(this)-20*this.m_partie.TAILLE_Y)/2;
-		
+
 		for (int i=0 ; i < this.m_partie.TAILLE_X ; i++){
 			for (int j=0 ; j < this.m_partie.TAILLE_Y ; j++){
 				
@@ -40,9 +42,13 @@ public class Ecran extends JFrame{
 				else if (this.m_partie.getGrille(i,j) == 3)	unG.setColor(Color.green);
 				else if (this.m_partie.getGrille(i,j) == 4)	unG.setColor(Color.yellow);
 				else continue;
-				unG.fillRect(m_MargeW+i*20, m_MargeH+j*20, 20, 20);
+				unG.fillRect(m_MargeW+i*5, m_MargeH+j*5, 5, 5);
 			}
 		}
 	} 
+	/*public static void main (String[] args){
+		Partie p = new Partie(2,2);
+		p.m_ecran = new Ecran(p);
+	}*/
 
 }
