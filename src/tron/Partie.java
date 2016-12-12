@@ -15,7 +15,7 @@ public class Partie {
 	private int m_vitesse;
 	private int m_nombreJoueurs;
 	private boolean m_isPartieEnCours;  //true si la partie est d�j� lanc�e
-	private Ecran m_ecran;
+	public Ecran m_ecran;
 	
 	public Partie(int unNombreJoueur, int uneVitesse){
 		m_nombresDeManches = 0;
@@ -61,7 +61,7 @@ public class Partie {
 	public void jouerPartie(){
 		while (m_isPartieEnCours){
 			if ( deplacerSerpents() ) {
-				m_ecran.rafraichir();
+				m_ecran.repaint();
 			}
 			else {
 				designerGagnants();

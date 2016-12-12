@@ -51,8 +51,9 @@ class Control implements ActionListener {
 		int nombreJoueurs = Integer.parseInt(JOptionPane.showInputDialog("Combien de joueurs ? (2-4)"));
 		int vitesse = Integer.parseInt(JOptionPane.showInputDialog("Choisissez une vitesse svp (from 1-100)"));
 		Partie p = new Partie(nombreJoueurs,vitesse);
-		p.lancerPartie();
-		//System.exit(0);
+		//p.lancerPartie();
+		this.m_menu.dispose();
+		new Ecran(p);
 	}
 
 }
