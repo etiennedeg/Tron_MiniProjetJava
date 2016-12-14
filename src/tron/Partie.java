@@ -1,5 +1,6 @@
 package tron;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 
@@ -158,8 +159,8 @@ public class Partie {
 		Partie partie = new Partie(2,100);
 		Joueur joueur1 = new Joueur("Bernard");
 		Joueur joueur2 = new Joueur("Jean-Guy");
-		Serpent serpent1 = new Serpent(1, "Bleu");
-		Serpent serpent2 = new Serpent(2, "Rouge");
+		Serpent serpent1 = new Serpent(1, Color.blue);
+		Serpent serpent2 = new Serpent(2, Color.yellow);
 		joueur1.setSerpent(serpent1);
 		joueur2.setSerpent(serpent2);
 		joueur1.rejoindrePartie(partie);
@@ -167,12 +168,17 @@ public class Partie {
 		partie.m_serpents.add(serpent1);
 		partie.m_serpents.add(serpent2);
 		partie.m_nombreJoueurs = 2;
+		partie.m_ecran.setVisible(true);
 		partie.lancerPartie();
+		
 	}
 
 	void ajouterSerpent(Serpent unSerpent){
 		m_serpents.add(unSerpent);
 		m_nombreJoueurs += 1;
+	}
+	public Serpent getSerpent(int i){
+		return m_serpents.get(i-1);
 	}
 }
 

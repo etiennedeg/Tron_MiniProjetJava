@@ -1,8 +1,10 @@
 package tron;
 
+import java.awt.Color;
+
 public class Serpent {
 
-	private String m_couleur;
+	private Color m_couleur;
 	private int m_numero;
 	private int m_orientation=0;
 	private int m_teteX=0;
@@ -12,7 +14,7 @@ public class Serpent {
 	private Joueur m_joueur;
 	private Partie m_partie;
 
-	public Serpent(int unNumero,String uneCouleur){
+	public Serpent(int unNumero,Color uneCouleur){
 		m_numero=unNumero;
 		m_couleur=uneCouleur;
 	}
@@ -57,7 +59,7 @@ public class Serpent {
 			else if(m_orientation==4){              //bas
 				int x=m_teteX;
 				int y=m_teteY+1;
-				m_isDead=!changerTete(x,y);
+				m_isDead=changerTete(x,y);
 		}
 		//changerScore();
 		return m_isDead;
@@ -80,10 +82,10 @@ public class Serpent {
 	public boolean getRes(){
 		return m_isDead;
 	}
-	public String getCouleur(){
+	public Color getCouleur(){
 		return m_couleur;
 	}
-	public void setCouleur(String uneCouleur){
+	public void setCouleur(Color uneCouleur){
 		m_couleur=uneCouleur;
 	}
 	public Joueur getJoueur(){

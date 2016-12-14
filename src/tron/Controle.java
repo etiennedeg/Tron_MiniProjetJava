@@ -16,6 +16,8 @@ public class Controle implements ActionListener {
 		Partie p = new Partie(nombreJoueurs,vitesse);
 		//p.lancerPartie(); le grille n'est pas bien initialise , je pense que les serpents doivent etre initialise dans la constructeur de Partie
 		this.m_menu.dispose();
-		p.m_ecran = new Ecran(p);
+		p.m_ecran.setVisible(true);
+		p.lancerPartie();
+
 	}
 }
