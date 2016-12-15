@@ -100,9 +100,6 @@ public class Partie {
 		stopperPartie();
 	}
 
-	private void detruireJoueurs(){
-
-	}
 
 	public boolean deplacerSerpents(){
 		boolean isDeplacementPossible = true;
@@ -116,11 +113,22 @@ public class Partie {
 	}
 
 	private void reinitialiserGrille(){
-		for (int i = 0; i < TAILLE_X; ++i ){
-			for (int j = 0; j < TAILLE_Y; ++j ){
+		for (int i = 1; i < TAILLE_X - 1; ++i ){
+			for (int j = 1; j < TAILLE_Y - 1; ++j ){
 				m_grille[i][j] = 0;
 			}
 		}
+
+		for (int i = 0; i < TAILLE_X; ++i){
+			m_grille[i][0] = -1;
+			m_grille[i][TAILLE_Y] = -1;
+		}
+
+		for (int j = 1; j < TAILLE_Y - 1; ++j){
+			m_grille[0][j] = -1;
+			m_grille[TAILLE_X][j] = -1;
+		}
+
 	}
 
 	// getters et setters
