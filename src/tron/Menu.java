@@ -1,12 +1,9 @@
 package tron;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Menu extends JFrame{
@@ -33,7 +30,7 @@ public class Menu extends JFrame{
 		this.getContentPane().add(m_panelStart);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(imgBack.getIconWidth(), imgBack.getIconHeight());
-		
+		this.setVisible(true);
 	}
 
 	public static void main (String[] args){
