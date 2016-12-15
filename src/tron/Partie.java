@@ -122,12 +122,12 @@ public class Partie {
 
 		for (int i = 0; i < TAILLE_X; ++i){
 			m_grille[i][0] = -1;
-			m_grille[i][TAILLE_Y] = -1;
+			m_grille[i][TAILLE_Y-1] = -1;
 		}
 
 		for (int j = 1; j < TAILLE_Y - 1; ++j){
 			m_grille[0][j] = -1;
-			m_grille[TAILLE_X][j] = -1;
+			m_grille[TAILLE_X-1][j] = -1;
 		}
 
 	}
@@ -178,7 +178,7 @@ public class Partie {
 		partie.m_nombreJoueurs = 2;
 		partie.m_ecran.setVisible(true);
 		partie.lancerPartie();
-		
+
 	}
 
 	void ajouterSerpent(Serpent unSerpent){
