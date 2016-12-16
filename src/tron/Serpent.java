@@ -12,7 +12,7 @@ public class Serpent {
 	private Joueur m_joueur;
 	private Partie m_partie;
 	
-	public void Serpent(int unNumero,String uneCouleur){
+	public Serpent(int unNumero,String uneCouleur){
 		m_numero=unNumero;
 		m_couleur=uneCouleur;
 	}
@@ -39,24 +39,24 @@ public class Serpent {
 	}
 	
 	public boolean deplacerSerpent(){
-			if(m_orientation==1){              //gauch
-				int x=m_teteX-1;
+			if(m_orientation==-1){              //gauch
+				int x=m_teteX+m_orientation;
 				int y=m_teteY;
 				m_isWin=changerTete(x,y);
 			}
-			else if(m_orientation==2){              //haut
+			else if(m_orientation==-2){              //haut
 				int x=m_teteX;
-				int y=m_teteY-1;
+				int y=(int) (m_teteY+0.5*m_orientation);
 				m_isWin=changerTete(x,y);
 			}
-			else if(m_orientation==3){              //droite
-				int x=m_teteX+1;
+			else if(m_orientation==1){              //droite
+				int x=m_teteX+m_orientation;
 				int y=m_teteY;
 				m_isWin=changerTete(x,y);
 			}
-			else if(m_orientation==4){              //bas
+			else if(m_orientation==2){              //bas
 				int x=m_teteX;
-				int y=m_teteY+1;
+				int y=(int) (m_teteY+0.5*m_orientation);
 				m_isWin=changerTete(x,y);
 		}
 		//changerScore();
@@ -72,7 +72,7 @@ public class Serpent {
 	}
 	
 	public void changerOrientation(int uneOrientation){
-		if (java.lang.Math.abs(m_orientation-uneOrientation)!=2){
+		if (java.lang.Math.abs(m_orientation)!=Math.abs(uneOrientation)){
 			m_orientation=uneOrientation;
 		}
 	}

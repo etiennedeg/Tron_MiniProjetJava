@@ -10,18 +10,18 @@ public class Controle implements KeyListener{
         int code=e.getKeyCode();
         
         if(code==KeyEvent.VK_UP){
-            m_serpent.changerOrientation(2);           
+            m_serpent.changerOrientation(-2);           
         }
          
         else if(code==KeyEvent.VK_RIGHT){
-        	m_serpent.changerOrientation(3);
+        	m_serpent.changerOrientation(1);
         }
          
         else if(code==KeyEvent.VK_DOWN){
-        	m_serpent.changerOrientation(4);
+        	m_serpent.changerOrientation(2);
         }  
         else if(code==KeyEvent.VK_LEFT){
-        	m_serpent.changerOrientation(1);
+        	m_serpent.changerOrientation(-1);
         }
          
 	}
