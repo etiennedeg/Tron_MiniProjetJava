@@ -10,11 +10,11 @@ public class PartieThread extends Thread{
 	}
 
 	public void run(){
-		try {
-			sleep( m_partie.getVitesse() );
-			m_partie.jouerPartie();
-		} catch (InterruptedException e){
-			e.printStackTrace();
+		if ( m_partie.deplacerSerpents() ) {
+			m_partie.getEcran().repaint();
+		}
+		else {
+			m_partie.designerGagnants();
 		}
 
 	}

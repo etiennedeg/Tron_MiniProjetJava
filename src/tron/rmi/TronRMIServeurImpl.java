@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-package tron.rmi;
 
-public class TronRMIServeurImpl {
-
-}
-=======
 package tron.rmi;
 
 import java.rmi.RemoteException;
@@ -12,8 +6,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import insar.gm.marketTP.rmi.MarcheRMIServeurImpl;
-import tron.Partie;
+import tron.*;
 
 public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMIServeur {
 	
@@ -22,21 +15,20 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	//Create the game
 	public TronRMIServeurImpl() throws RemoteException{
 		super();
-		partie = new Partie();
 	}
 
-	//Add a player to the game
-	public void rejoindrePartie() throws RemoteException {
-		
+	//Launch the game
+	public void lancerPartie(Integer nbjoueurs, Integer vitesse) throws RemoteException{
+		partie = new Partie(nbjoueurs,vitesse);
 	}
 	
 	//Main
 	public static void main(String[] args) {
 		try {
 			TronRMIServeurImpl p = new TronRMIServeurImpl();
-			Registry registry;
-			if (args.length > 0) registry = LocateRegistry.getRegistry(args[0]);
-			else registry = LocateRegistry.getRegistry();
+			Registry registry = LocateRegistry.createRegistry(1099);
+			if (args.length > 0) registry = LocateRegistry.getRegistry(1099);
+			else registry = LocateRegistry.getRegistry(1099);
 			registry.rebind("Partie", p);
 			System.out.println("La partie est bien enregistree");
 		} catch (RemoteException ex) {
@@ -46,4 +38,4 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	
 	
 }
->>>>>>> 9b09d7fecbafdcb9dbb0f11745ce242744e2f8df
+
