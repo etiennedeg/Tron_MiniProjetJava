@@ -10,6 +10,10 @@ import tron.*;
 
 public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMIServeur {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Partie partie;
 	
 	//Create the game
@@ -17,9 +21,9 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 		super();
 	}
 
-	//Launch the game
-	public void lancerPartie(Integer nbjoueurs, Integer vitesse) throws RemoteException{
-		partie = new Partie(nbjoueurs,vitesse);
+	//Waiting players to lunch the game
+	public void creePartie(int nbJoueurMax, int vitesse ) throws RemoteException{
+		partie = new Partie(nbJoueurMax,vitesse);
 	}
 	
 	//Main

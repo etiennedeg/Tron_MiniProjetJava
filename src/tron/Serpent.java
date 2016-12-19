@@ -1,11 +1,16 @@
 package tron;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Serpent {
 
+
+	private static List<Color> ColorList = Arrays.asList(Color.cyan,Color.RED,Color.green,Color.orange,Color.YELLOW);
 	private Color m_couleur;
-	private int m_numero;
+	int m_numero;
 	private int m_orientation=0;
 	private int m_teteX=0;
 	private int m_score=0;
@@ -14,11 +19,13 @@ public class Serpent {
 	private Joueur m_joueur;
 	private Partie m_partie;
 	private ControleKEY m_controle;
-	
 
-	public Serpent(int unNumero,Color uneCouleur){
-		m_numero=unNumero;
-		m_couleur=uneCouleur;
+
+
+	public Serpent(Joueur unJoueur){
+		m_numero=unJoueur.getJOUEURCREE();
+		m_joueur=unJoueur;
+		//m_couleur=ColorList.get(m_joueur.getJoueurCree());
 	}
 
 	public int getTeteX(){
@@ -36,10 +43,12 @@ public class Serpent {
 		if (uneGrille[x][y]==0)
 		{
 			m_partie.setGrille(x,y,m_numero);
+			m_partie.getEcran().editerBuff(m_numero, x, y);
 			return true;
 		}else{
 			return false;
 		}
+
 	}
 
 	public boolean deplacerSerpent(){
@@ -70,6 +79,8 @@ public class Serpent {
 
 	public void setPartie(Partie unePartie){
 		m_partie=unePartie;
+		unePartie.ajouterSerpent(this);
+		m_couleur=ColorList.get(m_joueur.getJOUEURCREE());
 	}
 
 	public int getOrientation(){
@@ -82,6 +93,9 @@ public class Serpent {
 		}
 	}
 
+	public void setNumero(int unNumero){
+		m_numero=unNumero;
+	}
 	public boolean getRes(){
 		return m_isDead;
 	}
