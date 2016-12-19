@@ -167,8 +167,8 @@ public class Partie {
 		Partie partie = new Partie(2,100);
 		Joueur joueur1 = new Joueur("Bernard",1);
 		Joueur joueur2 = new Joueur("Jean-Guy",2);
-		Serpent serpent1 = new Serpent(1, Color.blue);
-		Serpent serpent2 = new Serpent(2, Color.yellow);
+		Serpent serpent1 = new Serpent(joueur1);
+		Serpent serpent2 = new Serpent(joueur2);
 		joueur1.setSerpent(serpent1);
 		joueur2.setSerpent(serpent2);
 		joueur1.rejoindrePartie(partie);

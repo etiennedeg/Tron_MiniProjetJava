@@ -1,9 +1,14 @@
 package tron;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Serpent {
 
+
+	private static List<Color> ColorList = Arrays.asList(Color.cyan,Color.RED,Color.green,Color.orange,Color.YELLOW);
 	private Color m_couleur;
 	private int m_numero;
 	private int m_orientation=0;
@@ -14,11 +19,11 @@ public class Serpent {
 	private Joueur m_joueur;
 	private Partie m_partie;
 	private ControleKEY m_controle;
-	
 
-	public Serpent(int unNumero,Color uneCouleur){
-		m_numero=unNumero;
-		m_couleur=uneCouleur;
+
+	public Serpent(Joueur unJoueur){
+		m_numero=unJoueur.getJoueurCree();
+		m_joueur=unJoueur;
 	}
 
 	public int getTeteX(){
@@ -70,6 +75,8 @@ public class Serpent {
 
 	public void setPartie(Partie unePartie){
 		m_partie=unePartie;
+		unePartie.ajouterSerpent(this);
+		m_couleur=ColorList.get(m_joueur.getJoueurCree());
 	}
 
 	public int getOrientation(){
