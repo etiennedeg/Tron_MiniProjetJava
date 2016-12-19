@@ -21,6 +21,7 @@ public class Serpent {
 	private ControleKEY m_controle;
 
 
+
 	public Serpent(Joueur unJoueur){
 		m_numero=unJoueur.getJoueurCree();
 		m_joueur=unJoueur;
@@ -45,6 +46,7 @@ public class Serpent {
 		}else{
 			return false;
 		}
+		m_partie.getEcran().changerTete(m_numero, x, y);
 	}
 
 	public boolean deplacerSerpent(){
