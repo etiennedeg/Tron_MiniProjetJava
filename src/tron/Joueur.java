@@ -35,7 +35,7 @@ public class Joueur {
 	}
 	public void rejoindrePartie(Partie unePartie){
 		Serpent m_serpent=new Serpent(m_numero,m_colorList.get(m_numero));
-		//m_serpent.m_controle.;
+		//m_serpent.setControle();;
 		m_serpent.setJoueur(this);
 		m_serpent.setPartie(unePartie);
 	}
