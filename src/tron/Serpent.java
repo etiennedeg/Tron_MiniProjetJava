@@ -89,6 +89,9 @@ public class Serpent {
 		}
 	}
 
+	public void setNumero(int unNumero){
+		m_numero=unNumero;
+	}
 	public boolean getRes(){
 		return m_isDead;
 	}

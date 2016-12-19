@@ -8,7 +8,7 @@ public class Joueur {
 	private String m_nom;
 	private int m_record;
 	private Serpent m_serpent;
-	private int m_joueurCree;
+	private static int JOUEURCREE=1;
 	private int m_numero;
 
 	public Joueur(String unNom, int unNumero){
@@ -23,7 +23,7 @@ public class Joueur {
 		return m_serpent;
 	}
 	public int getJoueurCree(){
-		return m_joueurCree;
+		return JOUEURCREE;
 	}
 	public int getRecord(){
 		return m_record;
@@ -32,14 +32,11 @@ public class Joueur {
 		m_record=uneRecord;
 	}
 	public void rejoindrePartie(Partie unePartie){
-		int i;
-		for (i=1;i<unePartie.m_nombreJoueurs;i++){
-			Serpent m_serpent=new Serpent(this);
-			m_joueurCree++;
-		}
-
-		//m_serpent.m_controle.;
-		m_serpent.setJoueur(this);
+		Serpent m_serpent=new Serpent(this);
 		m_serpent.setPartie(unePartie);
+		m_numero=JOUEURCREE;
+		m_serpent.setNumero(m_numero);
+		JOUEURCREE++;
+		m_serpent.setJoueur(this);
 	}
 }
