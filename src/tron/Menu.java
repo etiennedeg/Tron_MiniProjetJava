@@ -15,7 +15,7 @@ public class Menu extends JFrame{
 
 	public Menu(){
 		super("Tron");
-		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"));
+		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"),1);
 		ImageIcon imgBack = new ImageIcon("serpent.png");
 		JLabel backGround = new JLabel(imgBack);
 		backGround.setBounds(0,0, imgBack.getIconWidth(), imgBack.getIconHeight());
