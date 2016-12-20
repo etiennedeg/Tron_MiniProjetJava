@@ -15,6 +15,7 @@ public class Ecran extends JFrame{
 	int m_MargeW,m_MargeH;
 	BufferedImage m_buffer;
 	JPanel m_PanelSerpents;
+	JLabel m_affichage;
 
 	public Ecran(Partie unePartie){
 		super("Tron");
@@ -22,20 +23,27 @@ public class Ecran extends JFrame{
 		ImageIcon imgBack = new ImageIcon("background.png");
 		JLabel backGround = new JLabel(imgBack);
 		backGround.setBounds(0,0, imgBack.getIconWidth(), imgBack.getIconHeight());
-		this.getLayeredPane().add(backGround , new Integer(Integer.MIN_VALUE));
-		((JPanel)this.getContentPane()).setOpaque(false);
+		getLayeredPane().add(backGround , new Integer(Integer.MIN_VALUE));
 
 		m_PanelSerpents = new JPanel();
 		m_PanelSerpents.setOpaque(false);
 		m_PanelSerpents.setLayout(null);
-		this.getContentPane().add(m_PanelSerpents);
+		setContentPane(m_PanelSerpents);
 
 		//imgBack.Width = imgBack.Height = 734
 		m_MargeW = (imgBack.getIconWidth()-5*this.m_partie.TAILLE_X)/2;
 		m_MargeH = (imgBack.getIconHeight()-5*this.m_partie.TAILLE_Y)/2;
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(imgBack.getIconWidth(), imgBack.getIconHeight());
-		//this.setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(imgBack.getIconWidth(), imgBack.getIconHeight());
+		//setVisible(true);
+		
+
+		m_buffer = new BufferedImage (getSize().width, getSize().height, BufferedImage.TYPE_INT_RGB);
+		m_affichage = new JLabel(new ImageIcon(m_buffer));
+		m_affichage.setSize(getSize().width, getSize().height);
+		m_PanelSerpents.add(m_affichage);
+
+
 	}
 	public void paint(Graphics unG){
 		super.paint(unG);
@@ -51,11 +59,11 @@ public class Ecran extends JFrame{
 		}*/
 	}
 	public void editerBuff (int unNum, int X, int Y){
-		m_buffer = new BufferedImage (getSize().width, getSize().height, BufferedImage.TYPE_INT_RGB);
 		m_buffer.getGraphics().setColor(m_partie.getSerpent(unNum).getCouleur());
-		m_buffer.getGraphics().fillRect(m_MargeW+X*5, m_MargeH+Y*5, 5, 5);
+		m_buffer.getGraphics().fillRect(m_MargeW + X * 5, m_MargeH + Y * 5, 5, 5);
 		//this.getContentPane().add(new JLabel(new ImageIcon(buff)));
-		m_PanelSerpents.add(new JLabel(new ImageIcon(m_buffer)));
+		m_affichage = new JLabel(new ImageIcon(m_buffer));
+		repaint();
 	}
 
 }

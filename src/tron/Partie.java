@@ -44,27 +44,27 @@ public class Partie {
 			switch (m_nombreJoueurs){
 				case 2:
 					m_serpents.get(0).changerTete( (int) TAILLE_X / 6, (int) TAILLE_Y / 2);
-					m_serpents.get(0).changerOrientation(3);
+					m_serpents.get(0).changerOrientation(1);
 					m_serpents.get(1).changerTete( (int) 5 * TAILLE_X / 6 + 1, (int) TAILLE_Y / 2);
-					m_serpents.get(1).changerOrientation(1);
+					m_serpents.get(1).changerOrientation(-1);
 					break;
 				case 3:
 					m_serpents.get(0).changerTete( (int) TAILLE_X / 2, (int) TAILLE_Y / 3);
-					m_serpents.get(0).changerOrientation(4);
+					m_serpents.get(0).changerOrientation(2);
 					m_serpents.get(1).changerTete( (int) TAILLE_X / 6, (int) 2 * TAILLE_Y / 3 + 1);
-					m_serpents.get(1).changerOrientation(3);
+					m_serpents.get(1).changerOrientation(1);
 					m_serpents.get(2).changerTete( (int) 5 * TAILLE_X / 6 + 1, (int) 2 * TAILLE_Y / 3);
-					m_serpents.get(2).changerOrientation(1);
+					m_serpents.get(2).changerOrientation(-1);
 					break;
 				case 4:
 					m_serpents.get(0).changerTete( (int) TAILLE_X / 3, (int) TAILLE_Y / 3);
-					m_serpents.get(0).changerOrientation(3);
+					m_serpents.get(0).changerOrientation(1);
 					m_serpents.get(1).changerTete( (int) TAILLE_X / 3, (int) 2 * TAILLE_Y / 3 + 1);
-					m_serpents.get(1).changerOrientation(3);
+					m_serpents.get(1).changerOrientation(1);
 					m_serpents.get(2).changerTete( (int) 2 * TAILLE_X / 3 + 1, (int)  TAILLE_Y / 3);
-					m_serpents.get(2).changerOrientation(1);
+					m_serpents.get(2).changerOrientation(-1);
 					m_serpents.get(3).changerTete( (int) 2 * TAILLE_X / 3 + 1, 2 * (int)  TAILLE_Y / 3);
-					m_serpents.get(3).changerOrientation(1);
+					m_serpents.get(3).changerOrientation(-1);
 					break;
 
 			}
@@ -179,7 +179,7 @@ public class Partie {
 	public static void main (String[] args){
 		Joueur joueur1 = new Joueur("Bernard");
 		Joueur joueur2 = new Joueur("Jean-Guy");
-		Partie partie = new Partie(2,100, joueur1);
+		Partie partie = new Partie(2,20, joueur1);
 		joueur1.rejoindrePartie(partie);
 		joueur2.rejoindrePartie(partie);
 		partie.m_ecran.setVisible(true);
