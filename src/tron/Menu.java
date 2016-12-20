@@ -2,6 +2,7 @@ package tron;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -21,7 +22,8 @@ public class Menu extends JFrame{
 	private Partie m_partie;
 	private DefaultListModel<String> m_joueursConnectes;
 	private JList<String> m_listeJoueurs;
-	private DefaultListModel<String> m_partiesCrees;
+	private DefaultListModel<String> m_nomsPartiesCrees;
+	private ArrayList<Partie> m_partiesCrees;
 	private JList<String> m_listeParties;
 	private JButton m_buttonStart;
 	private JButton m_boutonCreerPartie;
@@ -31,7 +33,7 @@ public class Menu extends JFrame{
 
 	public Menu(){
 		super("Tron");
-		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"),1);
+		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"));
 		m_controle = new Controle(this, m_joueur);
 
 		//ajout du background
@@ -57,14 +59,15 @@ public class Menu extends JFrame{
 
 	void afficherListePartie(){
 		//affichage de la liste de partie
-		m_partiesCrees = new DefaultListModel<String>();
+		m_nomsPartiesCrees = new DefaultListModel<String>();
+		m_partiesCrees = new ArrayList<Partie>();
 		m_listeParties = new JList<String>();
-		m_listeParties.setModel(m_partiesCrees);
+		m_listeParties.setModel(m_nomsPartiesCrees);
 		m_listeParties.setSize(210,210);
 		m_listeParties.setLocation(30,450);
 		m_panelStart.add(m_listeParties);
 
-		//affichage des boutons associés
+		//affichage des boutons associes
 		m_boutonCreerPartie = new JButton("Creer une nouvelle partie");
 		m_boutonCreerPartie.setLocation(400,500);
 		m_boutonCreerPartie.setSize(300,30);
@@ -72,12 +75,14 @@ public class Menu extends JFrame{
 		m_boutonCreerPartie.addActionListener(m_controle);
 
 
-		m_boutonRejoindrePartie = new JButton("Rejoindre une partie ");
+		m_boutonRejoindrePartie = new JButton("Rejoindre une partie");
 		m_boutonRejoindrePartie.setSize(300,30);
 		m_boutonRejoindrePartie.setLocation(400,580);
 		m_panelStart.add(m_boutonRejoindrePartie);
 		m_boutonRejoindrePartie.addActionListener(m_controle);
 
+		// chercher les parties cr�es dans le serveur
+		
 		repaint();
 	}
 
@@ -89,7 +94,8 @@ public class Menu extends JFrame{
 		m_listeJoueurs.setSize(210,210);
 		m_listeJoueurs.setLocation(30,450);
 
-		m_joueursConnectes.addElement(m_joueur.getNom());
+		m_joueursConnectes.addElement(m_joueur.getNom()); //a la place, l'ajouter au serveur
+		
 		m_panelStart.remove(m_listeParties);
 		m_panelStart.remove(m_boutonCreerPartie);
 		m_panelStart.remove(m_boutonRejoindrePartie);
@@ -115,14 +121,19 @@ public class Menu extends JFrame{
 		int nombreJoueursMax = Integer.parseInt(JOptionPane.showInputDialog("Combien de joueurs ? (2-4)"));
 		String[] choixVitesse = {"lent" , "modere", "rapide"};
 		int vitesse = JOptionPane.showOptionDialog(null, null, null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,  choixVitesse, choixVitesse[1]);
-		m_partie = new Partie(nombreJoueursMax, vitesse*5000, m_joueur.getNom());
-
+		m_partie = new Partie(nombreJoueursMax, vitesse*5000, m_joueur); //ajout Partie au serveur
+		
 		afficherListeJoueur();
 		afficherBoutonStart();
 	}
 
-	public void boutonRejoindrePartie(Partie unePartie){
-
+	public void rejoindrePartie(){
+		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );
+		afficherListeJoueur();
+	}
+	
+	public void lancerPartie(){
+		
 	}
 
 	public static void main (String[] args){
@@ -130,7 +141,7 @@ public class Menu extends JFrame{
 		menu.setVisible(true);
 	}
 
-	//classe privée pour réagir aux boutons
+	//classe privee pour reagir aux boutons
 	private class Controle implements ActionListener{
 
 		private Menu m_menu;
@@ -148,8 +159,12 @@ public class Menu extends JFrame{
 				creerNouvellePartie();
 			}
 
-			else if (e.getActionCommand() == "Creer une nouvelle partie"){
-				boutonRejoindrePartie(new Partie(1,1,"e")); // gérer exception si aucune partie selectionée ou si partie remplie
+			else if (e.getActionCommand() == "Rejoindre une partie"){
+				rejoindrePartie(); // gerer exception si aucune partie selectionée ou si partie remplie
+			}
+			
+			else {
+				lancerPartie();
 			}
 		}
 

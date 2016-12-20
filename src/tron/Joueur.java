@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 public class Joueur {
 
-	public static int NOMBREJOUEURSCREES=0;
+	public static int NOMBREJOUEURSCREES = 0;
 
 	private String m_nom;
 	private int m_record;
 	private Serpent m_serpent;
 	private int m_numero;
 
-	public Joueur(String unNom, int unNumero){
+	public Joueur(String unNom){
 		NOMBREJOUEURSCREES++;
-		m_nom=unNom;
-		m_numero=NOMBREJOUEURSCREES;
-		m_record=0;
+		m_nom = unNom;
+		m_numero = NOMBREJOUEURSCREES;
+		m_record = 0;
 
 	}
 	public void setSerpent(Serpent uneSerpent){

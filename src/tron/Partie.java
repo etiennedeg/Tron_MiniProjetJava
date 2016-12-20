@@ -10,6 +10,7 @@ public class Partie {
 	public static final int TAILLE_Y = 80;
 
 	private int m_nombresDeManches;
+	private Joueur m_createur;
 	private PartieThread m_partieThread;
 	private ArrayList<Integer> m_scores;
 	private int[][] m_grille;
@@ -20,7 +21,7 @@ public class Partie {
 	private boolean m_isPartieEnCours;  //true si la partie est d锟絡锟� lanc锟絜
 	private Ecran m_ecran;
 
-	public Partie(int unNombreMaxJoueurs, int uneVitesse){
+	public Partie(int unNombreMaxJoueurs, int uneVitesse, Joueur unCreateur){
 		m_nombresDeManches = 0;
 		m_ecran = new Ecran(this);
 		m_partieThread = new PartieThread(this);
@@ -28,6 +29,7 @@ public class Partie {
 		reinitialiserGrille();
 		m_isPartieEnCours = false;
 		m_vitesse = uneVitesse;
+		m_createur = unCreateur;
 		m_nombreJoueurs = 0;
 		m_nombreMaxJoueurs = unNombreMaxJoueurs; // exception a creer
 		m_serpents = new ArrayList<Serpent>();
@@ -175,9 +177,9 @@ public class Partie {
 
 
 	public static void main (String[] args){
-		Partie partie = new Partie(2,100);
-		Joueur joueur1 = new Joueur("Bernard",1);
-		Joueur joueur2 = new Joueur("Jean-Guy",2);
+		Joueur joueur1 = new Joueur("Bernard");
+		Joueur joueur2 = new Joueur("Jean-Guy");
+		Partie partie = new Partie(2,100, joueur1);
 		joueur1.rejoindrePartie(partie);
 		joueur2.rejoindrePartie(partie);
 		partie.m_ecran.setVisible(true);
