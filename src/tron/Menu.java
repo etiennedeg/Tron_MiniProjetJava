@@ -13,51 +13,114 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * Menu du jeu
+ * 
+ * @author JIANG Shangwei , MACE DE GASTINES Etienne
+ * @version 1.0
+ * @since 1.0
+ */
+@SuppressWarnings("serial")
 public class Menu extends JFrame{
 
-
+	/**
+	 * Le panel principal du menu 
+	 */
 	private JPanel m_panelStart;
+	
+	/**
+	 * Contrôle de boutons
+	 */
 	private Controle m_controle;
+	
+	/**
+	 * Le joueur actif 
+	 */
 	private Joueur m_joueur;
+	
+	/**
+	 * L'objet contenant les informations d'une partie du jeu
+	 */
 	private Partie m_partie;
+	
+	/**
+	 * Une liste des joueurs qui ont connecté au jeu   
+	 */
 	private DefaultListModel<String> m_joueursConnectes;
+	
+	/**
+	 * Une liste pour afficher les joueurs connectés 
+	 */
 	private JList<String> m_listeJoueurs;
+	
+	/**
+	 * Une liste de nom de partie créé  
+	 */
 	private DefaultListModel<String> m_nomsPartiesCrees;
+	
+	/**
+	 * Une liste de parties créés
+	 */
 	private ArrayList<Partie> m_partiesCrees;
+	
+	/**
+	 * Une liste pour afficher les parties créés 
+	 */
 	private JList<String> m_listeParties;
+	
+	/**
+	 * Un bouton pour lancer une partie du jeu  
+	 */
 	private JButton m_buttonStart;
+	
+	/**
+	 * Un bouton pour créer une partie du jeu  
+	 */
 	private JButton m_boutonCreerPartie;
+	
+	/**
+	 * Un bouton pour rejoindre une partie du jeu  
+	 */
 	private JButton m_boutonRejoindrePartie;
 
-
+	/**
+	 * Constructeur
+	 */
 
 	public Menu(){
 		super("Tron");
+		
+		/** créer le joueur actif  */		
 		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"));
+		
 		m_controle = new Controle(this, m_joueur);
 
-		//ajout du background
+		/** construction d'image du fond  */
 		ImageIcon imgBack = new ImageIcon("serpent.png");
 		JLabel backGround = new JLabel(imgBack);
 		backGround.setBounds(0,0, imgBack.getIconWidth(), imgBack.getIconHeight());
 		getLayeredPane().add(backGround , new Integer(Integer.MIN_VALUE));
 
-		//ajout du panel
+		/** Construction du panel principal */
 		m_panelStart = new JPanel();
 		m_panelStart.setLayout(null);
 		m_panelStart.setOpaque(false);
 		setContentPane(m_panelStart);
 
-		//affichage
+		/** Configuration de l'ecran */
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(imgBack.getIconWidth(), imgBack.getIconHeight());
 		setVisible(true);
 
-		//afficherListePartie();
 		afficherListePartie();
 	}
 
+	
+	/**
+	 * affichage de la liste de partie et affichage des boutons associes
+	 */
 	void afficherListePartie(){
+		
 		//affichage de la liste de partie
 		m_nomsPartiesCrees = new DefaultListModel<String>();
 		m_partiesCrees = new ArrayList<Partie>();
@@ -86,6 +149,10 @@ public class Menu extends JFrame{
 		repaint();
 	}
 
+	
+	/**
+	 * affichage de la liste des joueurs
+	 */
 	void afficherListeJoueur(){
 		//affichage de la liste des joueurs
 		m_joueursConnectes = new DefaultListModel<String>();
@@ -105,6 +172,10 @@ public class Menu extends JFrame{
 
 	}
 
+	
+	/**
+	 * affichage du bouton "start"
+	 */
 	void afficherBoutonStart(){
 		m_buttonStart = new JButton();
 		m_buttonStart.setIcon(new ImageIcon("start.png"));
@@ -116,7 +187,9 @@ public class Menu extends JFrame{
 		m_buttonStart.addActionListener(m_controle);
 	}
 
-
+	/**
+	 * créer une nouvelle partie 
+	 */
 	public void creerNouvellePartie(){
 		int nombreJoueursMax = Integer.parseInt(JOptionPane.showInputDialog("Combien de joueurs ? (2-4)"));
 		String[] choixVitesse = {"lent" , "modere", "rapide"};
@@ -127,6 +200,9 @@ public class Menu extends JFrame{
 		afficherBoutonStart();
 	}
 
+	/**
+	 * rejoindre une partie 
+	 */
 	public void rejoindrePartie(){
 		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );
 		afficherListeJoueur();
@@ -141,7 +217,14 @@ public class Menu extends JFrame{
 		menu.setVisible(true);
 	}
 
-	//classe privee pour reagir aux boutons
+	
+	/**
+	 * classe privee pour reagir aux boutons
+	 * 
+	 * @author MACE DE GASTINES Etienne
+	 * @version 1.0
+	 * @since 1.0
+	 */
 	private class Controle implements ActionListener{
 
 		private Menu m_menu;
