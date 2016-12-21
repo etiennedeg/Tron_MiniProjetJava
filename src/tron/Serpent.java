@@ -8,7 +8,7 @@ import java.util.List;
 public class Serpent {
 
 
-	private static List<Color> ColorList = Arrays.asList(Color.cyan,Color.RED,Color.green,Color.orange,Color.YELLOW);
+	private static List<Color> ColorList = Arrays.asList(Color.RED,Color.green,Color.orange,Color.YELLOW);
 	private Color m_couleur;
 	private int m_numero;
 	private int m_orientation=0;

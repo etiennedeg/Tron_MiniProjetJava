@@ -39,7 +39,7 @@ public class Ecran extends JFrame{
 		//setVisible(true);
 		
 
-		m_buffer = new BufferedImage (getSize().width, getSize().height, BufferedImage.TYPE_INT_RGB);
+		m_buffer = new BufferedImage (getSize().width, getSize().height, BufferedImage.TYPE_INT_ARGB);
 		m_affichage = new JLabel(new ImageIcon(m_buffer));
 		m_affichage.setOpaque(false);
 		m_affichage.setSize(getSize().width, getSize().height);
@@ -60,9 +60,14 @@ public class Ecran extends JFrame{
 			}
 		}*/
 	}
+
 	public void editerBuff (int unNum, int X, int Y){
 		//m_buffer.getGraphics().setColor(m_partie.getSerpent(unNum).getCouleur());
-		m_buffer.getGraphics().fillRect(m_MargeW + X * 5, m_MargeH + Y * 5, 5, 5);
+		Graphics g = m_buffer.getGraphics();
+		g.setColor(m_partie.getSerpent(unNum).getCouleur());
+		g.fillRect(m_MargeW + X * 5, m_MargeH + Y * 5, 5, 5);
+		g.dispose();
+		//m_buffer.getGraphics().fillRect(m_MargeW + X * 5, m_MargeH + Y * 5, 5, 5);
 		//this.getContentPane().add(new JLabel(new ImageIcon(buff)));
 		//m_affichage = new JLabel(new ImageIcon(m_buffer));
 		//m_affichage.setOpaque(false);
