@@ -63,8 +63,8 @@ public class Menu extends JFrame{
 		m_partiesCrees = new ArrayList<Partie>();
 		m_listeParties = new JList<String>();
 		m_listeParties.setModel(m_nomsPartiesCrees);
-		m_listeParties.setSize(210,210);
-		m_listeParties.setLocation(30,450);
+		//m_listeParties.setSize(210,210);
+		//m_listeParties.setLocation(30,450);
 		m_panelStart.add(m_listeParties);
 
 		//affichage des boutons associes
@@ -81,7 +81,7 @@ public class Menu extends JFrame{
 		m_panelStart.add(m_boutonRejoindrePartie);
 		m_boutonRejoindrePartie.addActionListener(m_controle);
 
-		// chercher les parties crées dans le serveur
+		// chercher les parties crï¿½es dans le serveur
 		
 		repaint();
 	}
