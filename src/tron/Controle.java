@@ -47,7 +47,7 @@ public class Controle implements ActionListener {
 	}
 
 	public void creerPartie(){
-		//demande le nombre de joueurs souhaité et la vitesse du serpent
+		//demande le nombre de joueurs souhaite et la vitesse du serpent
 		int nombreJoueursMax = Integer.parseInt(JOptionPane.showInputDialog("Combien de joueurs ? (2-4)"));
 		String[] choixVitesse = {"lent" , "modere", "rapide"};
 		int vitesse = JOptionPane.showOptionDialog(null, null, null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,  choixVitesse, choixVitesse[1]);
