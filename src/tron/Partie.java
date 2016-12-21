@@ -8,16 +8,17 @@ public class Partie {
 
 	public static final int TAILLE_X = 104;
 	public static final int TAILLE_Y = 80;
+
 	private int m_nombresDeManches;
 	private PartieThread m_partieThread;
 	private ArrayList<Integer> m_scores;
 	private int[][] m_grille;
 	private ArrayList<Serpent> m_serpents;
 	private int m_vitesse;
-	int m_nombreJoueurs;
+	private int m_nombreJoueurs;
 	private int m_nombreMaxJoueurs;
 	private boolean m_isPartieEnCours;  //true si la partie est d锟絡锟� lanc锟絜
-	public Ecran m_ecran;
+	private Ecran m_ecran;
 
 	public Partie(int unNombreMaxJoueurs, int uneVitesse){
 		m_nombresDeManches = 0;
@@ -28,13 +29,13 @@ public class Partie {
 		m_isPartieEnCours = false;
 		m_vitesse = uneVitesse;
 		m_nombreJoueurs = 0;
-		m_nombreMaxJoueurs = unNombreMaxJoueurs; // exception a cr茅er
+		m_nombreMaxJoueurs = unNombreMaxJoueurs; // exception a creer
 		m_serpents = new ArrayList<Serpent>();
 	}
 
 	public void lancerPartie(){
 		/*if (m_nombreJoueurs <=1){
-			throw NombreJoueurInsuffisant; // exception a cr锟絜r
+			throw NombreJoueurInsuffisant; // exception a creer
 		}*/
 		//else{
 			m_isPartieEnCours = true;
@@ -80,6 +81,7 @@ public class Partie {
 		while (m_isPartieEnCours){
 			try {
 				if ( deplacerSerpents() ) {
+					System.out.println("1");
 					m_ecran.repaint();
 				}
 				else {
@@ -163,30 +165,24 @@ public class Partie {
 		return m_ecran;
 	}
 
-	public static void main (String[] args){
-		Partie partie = new Partie(2,100);
-		Joueur joueur1 = new Joueur("Bernard",1);
-		Joueur joueur2 = new Joueur("Jean-Guy",2);
-		Serpent serpent1 = new Serpent(joueur1);
-		Serpent serpent2 = new Serpent(joueur2);
-		joueur1.setSerpent(serpent1);
-		joueur2.setSerpent(serpent2);
-		joueur1.rejoindrePartie(partie);
-		joueur2.rejoindrePartie(partie);
-		partie.m_serpents.add(serpent1);
-		partie.m_serpents.add(serpent2);
-		partie.m_nombreJoueurs = 2;
-		partie.m_ecran.setVisible(true);
-		partie.lancerPartie();
-
-	}
-
 	void ajouterSerpent(Serpent unSerpent){
 		m_serpents.add(unSerpent);
 		m_nombreJoueurs += 1;
 	}
 	public Serpent getSerpent(int i){
 		return m_serpents.get(i-1);
+	}
+
+
+	public static void main (String[] args){
+		Partie partie = new Partie(2,100);
+		Joueur joueur1 = new Joueur("Bernard",1);
+		Joueur joueur2 = new Joueur("Jean-Guy",2);
+		joueur1.rejoindrePartie(partie);
+		joueur2.rejoindrePartie(partie);
+		partie.m_ecran.setVisible(true);
+		partie.lancerPartie();
+
 	}
 }
 

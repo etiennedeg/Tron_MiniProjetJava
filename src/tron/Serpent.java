@@ -10,7 +10,7 @@ public class Serpent {
 
 	private static List<Color> ColorList = Arrays.asList(Color.cyan,Color.RED,Color.green,Color.orange,Color.YELLOW);
 	private Color m_couleur;
-	int m_numero;
+	private int m_numero;
 	private int m_orientation=0;
 	private int m_teteX=0;
 	private int m_score=0;
@@ -22,10 +22,12 @@ public class Serpent {
 
 
 
-	public Serpent(Joueur unJoueur){
-		m_numero=unJoueur.getJOUEURCREE();
+	public Serpent(Joueur unJoueur, Partie unePartie){
+		m_numero=unJoueur.getNumero();
 		m_joueur=unJoueur;
-		//m_couleur=ColorList.get(m_joueur.getJoueurCree());
+		setPartie(unePartie);
+		m_couleur=ColorList.get(m_partie.getNombresJoueurs());
+		m_controle = new ControleKEY();
 	}
 
 	public int getTeteX(){
@@ -37,50 +39,43 @@ public class Serpent {
 	}
 
 	public boolean changerTete(int x,int y){
-		m_teteX=x;
-		m_teteY=y;
-		int[][] uneGrille=m_partie.getGrille();
-		if (uneGrille[x][y]==0)
+		System.out.println(x);
+		System.out.println(y);
+		m_teteX = x;
+		m_teteY = y;
+		if ( (x < 0) || (x > Partie.TAILLE_X - 1) || (y < 0) || (y > Partie.TAILLE_Y - 1) ){
+			return false;
+		}
+		if (m_partie.getGrille(x,y) == 0)
 		{
 			m_partie.setGrille(x,y,m_numero);
 			m_partie.getEcran().editerBuff(m_numero, x, y);
 			return true;
-		}else{
+		}
+		else{
 			return false;
 		}
 
 	}
 
 	public boolean deplacerSerpent(){
-			if(m_orientation==-1){              //gauch
-				int x=m_teteX+m_orientation;
-				int y=m_teteY;
-				m_isDead=changerTete(x,y);
-			}
-			else if(m_orientation==-2){              //haut
-				int x=m_teteX;
-				int y=(int) (m_teteY+0.5*m_orientation);
-				m_isDead=changerTete(x,y);
-			}
-			else if(m_orientation==1){              //droite
-				int x=m_teteX+m_orientation;
-				int y=m_teteY;
-				m_isDead=changerTete(x,y);
-			}
-			else if(m_orientation==2){              //bas
-				int x=m_teteX;
-				int y=(int) (m_teteY+0.5*m_orientation);
-				m_isDead=changerTete(x,y);
-
+		if(Math.abs(m_orientation) == 1 ){              //deplacement selon x
+			int x = m_teteX + m_orientation;
+			int y = m_teteY;
+			m_isDead = !changerTete(x,y);
 		}
-		//changerScore();
-		return m_isDead;
+		else if(Math.abs(m_orientation) == 2){              //deplacement selon y
+			int x = m_teteX;
+			int y = (int) (m_teteY + 0.5 * m_orientation);
+			m_isDead = !changerTete(x,y);
+		}
+		return !m_isDead;
 	}
 
 	public void setPartie(Partie unePartie){
 		m_partie=unePartie;
 		unePartie.ajouterSerpent(this);
-		m_couleur=ColorList.get(m_joueur.getJOUEURCREE());
+		m_couleur=ColorList.get(m_joueur.getNumero());
 	}
 
 	public int getOrientation(){
@@ -93,24 +88,23 @@ public class Serpent {
 		}
 	}
 
-	public void setNumero(int unNumero){
-		m_numero=unNumero;
-	}
+
 	public boolean getRes(){
 		return m_isDead;
 	}
+
 	public Color getCouleur(){
 		return m_couleur;
 	}
+
 	public void setCouleur(Color uneCouleur){
 		m_couleur=uneCouleur;
 	}
+
 	public Joueur getJoueur(){
 		return m_joueur;
 	}
-	public void setJoueur(Joueur uneJoueur){
-		m_joueur=uneJoueur;
-	}
+
 	public void setControle(ControleKEY uneControle){
 		m_controle=uneControle;
 	}
