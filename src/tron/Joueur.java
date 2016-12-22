@@ -3,6 +3,11 @@ package tron;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**Pour definir un joueur
+ * 
+ * @author 
+ *
+ */
 public class Joueur {
 
 	public static int NOMBREJOUEURSCREES = 0;
@@ -17,7 +22,6 @@ public class Joueur {
 		m_nom = unNom;
 		m_numero = NOMBREJOUEURSCREES;
 		m_record = 0;
-
 	}
 	public void setSerpent(Serpent uneSerpent){
 		m_serpent=uneSerpent;
@@ -34,6 +38,11 @@ public class Joueur {
 	public void setRecord(int uneRecord){
 		m_record=uneRecord;
 	}
+	
+	/**Pour acceder a une partie antecedent, on cree un nouvel serpent
+	 * et l'associe au joueur et la partie.
+	 * @param unePartie la partie antecedent selectionne
+	 */
 	public void rejoindrePartie(Partie unePartie){
 		Serpent m_serpent=new Serpent(this,unePartie);
 		this.setSerpent(m_serpent);
@@ -42,6 +51,7 @@ public class Joueur {
 		m_serpent.setJoueur(this);
 		m_serpent.setPartie(unePartie);
 		NOMBREJOUEURSCREES++;
+	}
 
 	public int getNumero(){
 		return m_numero;

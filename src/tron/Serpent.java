@@ -7,7 +7,10 @@ import java.util.List;
 
 public class Serpent {
 
-
+	/**Pour definir un Serpent, et d¨¦placer le serpent.
+	 * @author 
+	*/
+	 
 	private static List<Color> ColorList = Arrays.asList(Color.RED,Color.green,Color.orange,Color.YELLOW);
 	private Color m_couleur;
 	private int m_numero;
@@ -21,7 +24,11 @@ public class Serpent {
 	private ControleKEY m_controle;
 
 
-
+	/**
+	 * Creer un Serpent liee a un joueur et une partie.
+	 * @param unJoueur
+	 * @param unePartie
+	 */
 	public Serpent(Joueur unJoueur, Partie unePartie){
 		m_numero=unJoueur.getNumero();
 		m_joueur=unJoueur;
@@ -38,6 +45,11 @@ public class Serpent {
 		return m_teteY;
 	}
 
+	/**
+	 * Pour changer la position de la tete du serpent
+	 * @param x :L'abscisse de la tete du serpent.
+	 * @param y :L'ordonnee de la tete du serpent.
+	 */
 	public boolean changerTete(int x,int y){
 		System.out.println(x);
 		System.out.println(y);
@@ -58,6 +70,11 @@ public class Serpent {
 
 	}
 
+	/**
+	 * Deplacer le serpent (si possible) par changer sa tete.
+	 * @return true si on peut deplacer le serpent (c'est pas mort);
+	 * false sinon
+	 */
 	public boolean deplacerSerpent(){
 		if(Math.abs(m_orientation) == 1 ){              //deplacement selon x
 			int x = m_teteX + m_orientation;
@@ -72,6 +89,8 @@ public class Serpent {
 		return !m_isDead;
 	}
 
+	/**Setters et getters
+	 */
 	public void setPartie(Partie unePartie){
 		m_partie=unePartie;
 		unePartie.ajouterSerpent(this);
