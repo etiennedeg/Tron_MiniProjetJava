@@ -3,6 +3,8 @@ package tron;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import tron.ihm.Ecran;
+
 
 public class Partie {
 
@@ -18,7 +20,7 @@ public class Partie {
 	private int m_vitesse;
 	private int m_nombreJoueurs;
 	private int m_nombreMaxJoueurs;
-	private boolean m_isPartieEnCours;  //true si la partie est d锟絡锟� lanc锟絜
+	private boolean m_isPartieEnCours;  //true si la partie est deja lancee
 	private Ecran m_ecran;
 
 	public Partie(int unNombreMaxJoueurs, int uneVitesse, Joueur unCreateur){
@@ -82,15 +84,7 @@ public class Partie {
 	public synchronized void jouerPartie(){
 		while (m_isPartieEnCours){
 			try {
-				if ( deplacerSerpents() ) {
-					System.out.println("1");
-					m_ecran.repaint();
-				}
-				else {
-					designerGagnants();
-				}
-				//wait(m_vitesse);
-				//m_partieThread.run();
+				m_partieThread.run();
 				Thread.sleep( m_vitesse );
 			} catch (InterruptedException e){
 				e.printStackTrace();
@@ -179,7 +173,7 @@ public class Partie {
 	public static void main (String[] args){
 		Joueur joueur1 = new Joueur("Bernard");
 		Joueur joueur2 = new Joueur("Jean-Guy");
-		Partie partie = new Partie(2,20, joueur1);
+		Partie partie = new Partie(2,100, joueur1);
 		joueur1.rejoindrePartie(partie);
 		joueur2.rejoindrePartie(partie);
 		partie.m_ecran.setVisible(true);

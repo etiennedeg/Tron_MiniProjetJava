@@ -6,8 +6,16 @@ import java.awt.event.KeyListener;
 public class ControleKEY implements KeyListener{
 
 	Serpent m_serpent;
+	
+	public ControleKEY(Serpent unSerpent){
+		m_serpent =  unSerpent;
+	}
+	
+	@Override
 	public void keyPressed(KeyEvent e) {
         int code=e.getKeyCode();
+
+        System.out.println("1");
         
         if(code==KeyEvent.VK_UP){
             m_serpent.changerOrientation(-2);           
@@ -28,14 +36,13 @@ public class ControleKEY implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
+
 	
 }
