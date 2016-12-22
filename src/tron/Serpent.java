@@ -26,8 +26,9 @@ public class Serpent {
 		m_numero=unJoueur.getNumero();
 		m_joueur=unJoueur;
 		setPartie(unePartie);
-		m_couleur=ColorList.get(m_partie.getNombresJoueurs());
-		m_controle = new ControleKEY();
+		m_couleur=ColorList.get(m_partie.getNombresJoueurs()-1);
+		m_controle = new ControleKEY(this);
+		m_partie.getEcran().addKeyListener(m_controle);
 	}
 
 	public int getTeteX(){

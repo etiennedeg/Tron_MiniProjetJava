@@ -13,11 +13,10 @@ public class Joueur {
 	private int m_numero;
 
 	public Joueur(String unNom){
-		NOMBREJOUEURSCREES++;
 		m_nom = unNom;
 		m_numero = NOMBREJOUEURSCREES;
 		m_record = 0;
-
+		NOMBREJOUEURSCREES++;
 	}
 	public void setSerpent(Serpent uneSerpent){
 		m_serpent=uneSerpent;
