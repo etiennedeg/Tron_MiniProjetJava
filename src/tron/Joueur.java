@@ -14,9 +14,9 @@ public class Joueur {
 
 	public Joueur(String unNom){
 		m_nom = unNom;
-		m_numero = NOMBREJOUEURSCREES;
 		m_record = 0;
 		NOMBREJOUEURSCREES++;
+		m_numero = NOMBREJOUEURSCREES;
 	}
 	public void setSerpent(Serpent uneSerpent){
 		m_serpent=uneSerpent;

@@ -3,6 +3,8 @@ package tron;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import tron.ihm.Ecran;
+
 
 public class Partie {
 
@@ -164,7 +166,7 @@ public class Partie {
 		m_nombreJoueurs += 1;
 	}
 	public Serpent getSerpent(int i){
-		return m_serpents.get(i);
+		return m_serpents.get(i-1);
 	}
 
 
