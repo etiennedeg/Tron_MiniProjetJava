@@ -238,7 +238,7 @@ public class Menu extends JFrame{
 	}
 
 	public void terminerPartie(){
-		// serveur --> faire appel à tous les joueurs de la partie quitterPartie() puis supprimer la partie
+		// serveur --> faire appel ï¿½ tous les joueurs de la partie quitterPartie() puis supprimer la partie
 	}
 	
 	public void lancerPartie(){
