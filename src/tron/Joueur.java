@@ -1,7 +1,16 @@
 package tron;
 
 import java.awt.Color;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import tron.rmi.TronRMIServeur;
+import tron.rmi.TronRMIServeurImpl;
+
 
 /**Pour definir un joueur
  * 
@@ -12,6 +21,7 @@ public class Joueur {
 
 	public static int NOMBREJOUEURSCREES = 0;
 
+	private TronRMIServeur m_objetDistant; 
 	private String m_nom;
 	private int m_record;
 	private Serpent m_serpent;
@@ -22,6 +32,16 @@ public class Joueur {
 		m_record = 0;
 		NOMBREJOUEURSCREES++;
 		m_numero = NOMBREJOUEURSCREES;
+		try {
+			Remote remote = Naming.lookup("rmi://00.0.0.00/TestRMI");
+			m_objetDistant = (TronRMIServeur) remote;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 	public void setSerpent(Serpent uneSerpent){
 		m_serpent=uneSerpent;
@@ -59,5 +79,9 @@ public class Joueur {
 
 	public String getNom(){
 		return m_nom;
+	}
+	
+	public TronRMIServeur getObjetDistant(){
+		return m_objetDistant;
 	}
 }

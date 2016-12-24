@@ -128,7 +128,7 @@ public class Menu extends JFrame{
 		m_panelStart.removeAll();
 		
 		//affichage de la liste de partie
-		m_nomsPartiesCrees = new DefaultListModel<String>(); //serveur --> chercher cette liste sur le serveur
+		m_nomsPartiesCrees = m_joueur.getObjetDistant().getListeParties();
 		m_partiesCrees = new ArrayList<Partie>();
 		m_listeParties = new JList<String>();
 		m_listeParties.setModel(m_nomsPartiesCrees);
@@ -159,14 +159,12 @@ public class Menu extends JFrame{
 	 */
 	void afficherListeJoueur(){
 		//affichage de la liste des joueurs
-		m_joueursConnectes = new DefaultListModel<String>(); //serveur --> chercher cette liste sur le serveur
-		m_listeJoueurs = new JList<String>();
+		m_nomsPartiesCrees = m_joueur.getObjetDistant().getListeParties();
+s		m_listeJoueurs = new JList<String>();
 		m_listeJoueurs.setModel(m_joueursConnectes);
 		m_listeJoueurs.setSize(210,210);
 		m_listeJoueurs.setLocation(30,450);
 
-		m_joueursConnectes.addElement(m_joueur.getNom()); //a la place, serveur-->ajouter le joueur a la partie
-		
 		m_panelStart.add(m_listeJoueurs);
 
 		repaint();
@@ -226,6 +224,7 @@ public class Menu extends JFrame{
 	 */
 	public void rejoindrePartie(){
 		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );
+		m_joueur.getObjetDistant().ajouterJoueur(m_listeParties.getAnchorSelectionIndex(), m_joueur);
 		afficherListeJoueur();
 		afficherBoutonQuitterPartie();
 	}

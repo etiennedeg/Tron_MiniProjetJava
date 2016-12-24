@@ -165,10 +165,14 @@ public class Partie {
 		m_serpents.add(unSerpent);
 		m_nombreJoueurs += 1;
 	}
+	
 	public Serpent getSerpent(int i){
 		return m_serpents.get(i-1);
 	}
 
+	public Joueur getCreateur(){
+		return m_createur;
+	}
 
 	public static void main (String[] args){
 		Joueur joueur1 = new Joueur("Bernard");
