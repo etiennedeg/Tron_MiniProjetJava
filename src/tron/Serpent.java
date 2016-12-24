@@ -7,11 +7,11 @@ import java.util.List;
 
 public class Serpent {
 
-	/**Pour definir un Serpent, et d¨¦placer le serpent.
+	/**Pour definir un Serpent, et dï¿½ï¿½placer le serpent.
 	 * @author 
 	*/
 	 
-	private static List<Color> ColorList = Arrays.asList(Color.RED,Color.green,Color.orange,Color.YELLOW);
+	private static List<Color> ColorList = Arrays.asList(Color.red,Color.blue,Color.green,Color.orange);
 	private Color m_couleur;
 	private int m_numero;
 	private int m_orientation=0;
@@ -30,10 +30,10 @@ public class Serpent {
 	 * @param unePartie
 	 */
 	public Serpent(Joueur unJoueur, Partie unePartie){
-		m_numero=unJoueur.getNumero();
 		m_joueur=unJoueur;
 		setPartie(unePartie);
-		m_couleur=ColorList.get(m_partie.getNombresJoueurs()-1);
+		m_numero=m_partie.getNombresJoueurs();
+		m_couleur=ColorList.get(m_numero-1);
 		m_controle = new ControleKEY(this);
 		m_partie.getEcran().addKeyListener(m_controle);
 	}
@@ -95,7 +95,7 @@ public class Serpent {
 	public void setPartie(Partie unePartie){
 		m_partie=unePartie;
 		unePartie.ajouterSerpent(this);
-		m_couleur=ColorList.get(m_joueur.getNumero());
+		//m_couleur=ColorList.get(m_joueur.getNumero());
 	}
 
 	public int getOrientation(){

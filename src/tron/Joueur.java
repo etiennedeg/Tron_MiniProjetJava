@@ -43,6 +43,7 @@ public class Joueur {
 			e.printStackTrace();
 		}
 	}
+	
 	public void setSerpent(Serpent uneSerpent){
 		m_serpent=uneSerpent;
 	}
@@ -66,11 +67,6 @@ public class Joueur {
 	public void rejoindrePartie(Partie unePartie){
 		Serpent m_serpent=new Serpent(this,unePartie);
 		this.setSerpent(m_serpent);
-		m_numero=NOMBREJOUEURSCREES;
-		m_serpent.setNumero(m_numero);
-		m_serpent.setJoueur(this);
-		m_serpent.setPartie(unePartie);
-		NOMBREJOUEURSCREES++;
 	}
 
 	public int getNumero(){

@@ -176,12 +176,12 @@ public class Partie {
 
 	public static void main (String[] args){
 		Joueur joueur1 = new Joueur("Bernard");
-		Joueur joueur2 = new Joueur("Jean-Guy");
 		Partie partie = new Partie(2,100, joueur1);
 		joueur1.rejoindrePartie(partie);
+		Joueur joueur2 = new Joueur("Jean-Guy");
 		joueur2.rejoindrePartie(partie);
 		partie.m_ecran.setVisible(true);
-		partie.lancerPartie();
+		partie.lancerPartie(); 
 
 	}
 }

@@ -57,8 +57,9 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 			//repaintEcran
 		}
 	}
-	
-	
+
+
+	//ecrire quitter Partie et finir le menu
 	
 	//Waiting players to lunch the game
 	public void creePartie(int nbJoueurMax, int vitesse ) throws RemoteException{
