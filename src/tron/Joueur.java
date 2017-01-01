@@ -15,7 +15,7 @@ import tron.rmi.TronRMIServeurImpl;
 /**Pour definir un joueur
  * 
  * @author 
- *
+ * 
  */
 public class Joueur {
 
@@ -27,6 +27,10 @@ public class Joueur {
 	private Serpent m_serpent;
 	private int m_numero;
 
+	/**
+	 * 
+	 * @param unNom   le nom du joueur
+	 */
 	public Joueur(String unNom){
 		m_nom = unNom;
 		m_record = 0;
@@ -44,6 +48,10 @@ public class Joueur {
 		}
 	}
 	
+	/**
+	 * Associer un serpent a un joueur
+	 * @param uneSerpent
+	 */
 	public void setSerpent(Serpent uneSerpent){
 		m_serpent=uneSerpent;
 	}
@@ -52,6 +60,10 @@ public class Joueur {
 		return m_serpent;
 	}
 
+	/**
+	 * Obtenir le record
+	 * @return le record 
+	 */
 	public int getRecord(){
 		return m_record;
 	}
