@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.omg.CORBA.SystemException;
+
 import tron.ihm.Ecran;
 
 
@@ -11,20 +13,24 @@ public class Partie implements Serializable{
 
 	public static final int TAILLE_X = 104;
 	public static final int TAILLE_Y = 80;
-
+	
+	public static int NBPARTIESCREES = 0;
+	private int m_numero;
 	private int m_nombresDeManches;
 	private Joueur m_createur;
 	private PartieThread m_partieThread;
 	private ArrayList<Integer> m_scores;
 	private int[][] m_grille;
-	private ArrayList<Serpent> m_serpents;
+	private ArrayList<Serpent> m_serpents = new ArrayList<Serpent>();
 	private int m_vitesse;
-	private int m_nombreJoueurs;
+	private int m_nombreJoueurs = 0;
 	private int m_nombreMaxJoueurs;
 	private boolean m_isPartieEnCours;  //true si la partie est deja lancee
 	private Ecran m_ecran;
 
 	public Partie(int unNombreMaxJoueurs, int uneVitesse, Joueur unCreateur){
+		m_numero = NBPARTIESCREES;
+		NBPARTIESCREES++;
 		m_nombresDeManches = 0;
 		m_ecran = new Ecran(this);
 		//new Ecran(this);
@@ -36,7 +42,6 @@ public class Partie implements Serializable{
 		m_createur = unCreateur;
 		m_nombreJoueurs = 0;
 		m_nombreMaxJoueurs = unNombreMaxJoueurs; // exception a creer
-		m_serpents = new ArrayList<Serpent>();
 	}
 
 	public void lancerPartie(){
@@ -46,6 +51,10 @@ public class Partie implements Serializable{
 		//else{
 			m_isPartieEnCours = true;
 			switch (m_nombreJoueurs){
+				case 1:
+					m_serpents.get(0).changerTete( (int) TAILLE_X / 6, (int) TAILLE_Y / 2);
+					m_serpents.get(0).changerOrientation(1);
+					break;
 				case 2:
 					m_serpents.get(0).changerTete( (int) TAILLE_X / 6, (int) TAILLE_Y / 2);
 					m_serpents.get(0).changerOrientation(1);
@@ -70,6 +79,7 @@ public class Partie implements Serializable{
 					m_serpents.get(3).changerTete( (int) 2 * TAILLE_X / 3 + 1, 2 * (int)  TAILLE_Y / 3);
 					m_serpents.get(3).changerOrientation(-1);
 					break;
+				//default :System.exit(0);
 
 			}
 			m_ecran.setVisible(true);
@@ -83,8 +93,8 @@ public class Partie implements Serializable{
 		m_isPartieEnCours = false;
 	}
 
-	public synchronized void jouerPartie(){
-		while (m_isPartieEnCours){
+	public void jouerPartie(){
+		/*while (m_isPartieEnCours){
 			try {
 				m_partieThread.run();
 				Thread.sleep( m_vitesse );
@@ -92,7 +102,8 @@ public class Partie implements Serializable{
 				e.printStackTrace();
 			}
 
-		}
+		}*/
+		m_partieThread.start();
 		System.out.println("finish");
 	}
 
@@ -133,6 +144,9 @@ public class Partie implements Serializable{
 	}
 
 	// getters et setters
+	public int getm_numero(){
+		return m_numero;
+	}
 
 	public boolean isPartieEnCours(){
 		return m_isPartieEnCours;
@@ -168,7 +182,7 @@ public class Partie implements Serializable{
 
 	void ajouterSerpent(Serpent unSerpent){
 		m_serpents.add(unSerpent);
-		m_nombreJoueurs += 1;
+		m_nombreJoueurs++;
 	}
 	
 	public Serpent getSerpent(int i){
@@ -183,8 +197,8 @@ public class Partie implements Serializable{
 		Joueur joueur1 = new Joueur("Bernard");
 		Partie partie = new Partie(2,100, joueur1);
 		joueur1.rejoindrePartie(partie);
-		Joueur joueur2 = new Joueur("Jean-Guy");
-		joueur2.rejoindrePartie(partie);
+		//Joueur joueur2 = new Joueur("Jean-Guy");
+		//joueur2.rejoindrePartie(partie);
 		//partie.m_ecran.setVisible(true);
 		partie.lancerPartie(); 
 

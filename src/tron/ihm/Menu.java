@@ -66,7 +66,7 @@ public class Menu extends JFrame{
 	/**
 	 * Une liste de parties creees
 	 */
-	private ArrayList<Partie> m_partiesCrees;
+	private static ArrayList<Partie> m_partiesCrees;
 	
 	/**
 	 * Une liste pour afficher les parties creees 
@@ -235,9 +235,9 @@ public class Menu extends JFrame{
 		m_partie = new Partie(nombreJoueursMax, (4-vitesse)*15, m_joueur); 
 		// serveur --> ajouter la Partie et mettre le createur dans la partie
 		m_tronServeur.ajouterPartie(m_partie, m_joueur);
-		m_partie.setm_createur(m_joueur);
-		m_joueursConnectes = m_tronServeur.getListeJoueurs(m_joueur.getNumero()-1);
-		
+		m_joueur.rejoindrePartie(m_partie);
+		m_joueursConnectes = m_tronServeur.getListeJoueurs(m_partie.getm_numero());
+		m_partiesCrees.add(m_partie);
 		
 		afficherListeJoueur();
 		afficherBoutonTerminerPartie();
