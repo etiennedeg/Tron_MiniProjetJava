@@ -7,6 +7,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 
 import tron.rmi.TronRMIServeur;
 import tron.rmi.TronRMIServeurImpl;
@@ -33,10 +34,11 @@ public class Joueur {
 		NOMBREJOUEURSCREES++;
 		m_numero = NOMBREJOUEURSCREES;
 		try {
-			Remote remote = Naming.lookup("rmi://00.0.0.00/TestRMI");
-			m_objetDistant = (TronRMIServeur) remote;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			//Remote remote = Naming.lookup("rmi://00.0.0.00/TestRMI");
+			//m_objetDistant = (TronRMIServeur) remote;
+			m_objetDistant =(TronRMIServeur)LocateRegistry.getRegistry(1099).lookup("Partie");
+		/*} catch (MalformedURLException e) {
+			e.printStackTrace();*/
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotBoundException e) {
@@ -77,7 +79,7 @@ public class Joueur {
 		return m_nom;
 	}
 	
-	public TronRMIServeur getObjetDistant(){
+	public TronRMIServeur getObjetDistant()throws RemoteException{
 		return m_objetDistant;
 	}
 }

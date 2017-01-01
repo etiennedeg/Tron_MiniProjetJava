@@ -2,6 +2,7 @@ package tron.ihm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -85,14 +86,23 @@ public class Menu extends JFrame{
 	 * Un bouton pour rejoindre une partie du jeu  
 	 */
 	private JButton m_boutonRejoindrePartie;
+	
+	/**
+	 * Un bouton pour terminer une partie du jeu  
+	 */
 	private JButton m_boutonTerminerPartie;
+	
+	/**
+	 * Un bouton pour quitter du jeu  
+	 */
 	private JButton m_boutonQuitterPartie;
 
 	/**
 	 * Constructeur
+	 * @throws RemoteException 
 	 */
 
-	public Menu(){
+	public Menu() throws RemoteException{
 		super("Tron");
 		
 		/** creer le joueur actif  */		
@@ -123,8 +133,9 @@ public class Menu extends JFrame{
 	
 	/**
 	 * affichage de la liste de partie et affichage des boutons associes
+	 * @throws RemoteException 
 	 */
-	void afficherListePartie(){
+	void afficherListePartie() throws RemoteException{
 		m_panelStart.removeAll();
 		
 		//affichage de la liste de partie
@@ -156,11 +167,12 @@ public class Menu extends JFrame{
 	
 	/**
 	 * affichage de la liste des joueurs
+	 * @throws RemoteException 
 	 */
-	void afficherListeJoueur(){
+	void afficherListeJoueur() throws RemoteException{
 		//affichage de la liste des joueurs
 		m_nomsPartiesCrees = m_joueur.getObjetDistant().getListeParties();
-s		m_listeJoueurs = new JList<String>();
+		m_listeJoueurs = new JList<String>();
 		m_listeJoueurs.setModel(m_joueursConnectes);
 		m_listeJoueurs.setSize(210,210);
 		m_listeJoueurs.setLocation(30,450);
@@ -186,6 +198,9 @@ s		m_listeJoueurs = new JList<String>();
 		m_buttonStart.addActionListener(m_controle);
 	}
 
+	/**
+	 * affichage du bouton "Quitter la partie"
+	 */
 	void afficherBoutonQuitterPartie(){
 		m_boutonQuitterPartie = new JButton("Quitter la partie");
 		m_boutonQuitterPartie.setSize(300,30);
@@ -194,6 +209,9 @@ s		m_listeJoueurs = new JList<String>();
 		m_boutonQuitterPartie.addActionListener(m_controle);
 	}
 	
+	/**
+	 * affichage du bouton "Terminer la partie"
+	 */
 	void afficherBoutonTerminerPartie(){
 		m_boutonTerminerPartie = new JButton("Terminer la partie");
 		m_boutonTerminerPartie.setSize(300,30);
@@ -204,8 +222,9 @@ s		m_listeJoueurs = new JList<String>();
 
 	/**
 	 * creeer une nouvelle partie 
+	 * @throws RemoteException 
 	 */
-	public void creerNouvellePartie(){
+	public void creerNouvellePartie() throws RemoteException{
 		m_panelStart.removeAll();
 		
 		int nombreJoueursMax = Integer.parseInt(JOptionPane.showInputDialog("Combien de joueurs ? (2-4)"));
@@ -221,34 +240,46 @@ s		m_listeJoueurs = new JList<String>();
 
 	/**
 	 * rejoindre une partie 
+	 * @throws RemoteException 
 	 */
-	public void rejoindrePartie(){
+	public void rejoindrePartie() throws RemoteException{
 		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );
 		m_joueur.getObjetDistant().ajouterJoueur(m_listeParties.getAnchorSelectionIndex(), m_joueur);
 		afficherListeJoueur();
 		afficherBoutonQuitterPartie();
 	}
 	
-	public void quitterPartie(){
+	/**
+	 * quitter une partie
+	 * @throws RemoteException 
+	 */
+	public void quitterPartie() throws RemoteException{
 		m_panelStart.removeAll();
 		
 		// serveur --> enlever le joueur de la partie
 		afficherListePartie();
 	}
 
+	
+	/**
+	 * terminer la partie
+	 */
 	public void terminerPartie(){
 		// serveur --> faire appel � tous les joueurs de la partie quitterPartie() puis supprimer la partie
 	}
 	
+	/**
+	 * lancer la partie
+	 */
 	public void lancerPartie(){
 		setVisible(false);
 		m_partie.lancerPartie();
 	}
 	
-	public static void main (String[] args){
+	/*public static void main (String[] args){
 		Menu menu = new Menu();
 		menu.setVisible(true);
-	}
+	}*/
 
 	
 	/**
@@ -268,15 +299,30 @@ s		m_listeJoueurs = new JList<String>();
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if ( e.getActionCommand() == "Creer une nouvelle partie"){
-				creerNouvellePartie();
+				try {
+					creerNouvellePartie();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 
 			else if (e.getActionCommand() == "Rejoindre une partie"){
-				rejoindrePartie(); // gerer exception si aucune partie selectionee ou si partie remplie
+				try {
+					rejoindrePartie();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} // gerer exception si aucune partie selectionee ou si partie remplie
 			}
 			
 			else if (e.getActionCommand() == "Quitter la partie"){
-				quitterPartie();
+				try {
+					quitterPartie();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			
 			else if (e.getActionCommand() == "Terminer la partie"){
