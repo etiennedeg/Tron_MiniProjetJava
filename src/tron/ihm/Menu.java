@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import tron.Joueur;
 import tron.Partie;
+import tron.rmi.TronRMIServeur;
 
 /**
  * Menu du jeu
@@ -50,7 +51,7 @@ public class Menu extends JFrame{
 	/**
 	 * Une liste des joueurs qui sont connecte au jeu   
 	 */
-	private DefaultListModel<String> m_joueursConnectes;
+	public DefaultListModel<String> m_joueursConnectes;
 	
 	/**
 	 * Une liste pour afficher les joueurs connectés 
@@ -65,7 +66,7 @@ public class Menu extends JFrame{
 	/**
 	 * Une liste de parties creees
 	 */
-	private ArrayList<Partie> m_partiesCrees;
+	private static ArrayList<Partie> m_partiesCrees;
 	
 	/**
 	 * Une liste pour afficher les parties creees 
@@ -96,6 +97,8 @@ public class Menu extends JFrame{
 	 * Un bouton pour quitter du jeu  
 	 */
 	private JButton m_boutonQuitterPartie;
+	
+	public TronRMIServeur m_tronServeur;
 
 	/**
 	 * Constructeur
@@ -164,7 +167,6 @@ public class Menu extends JFrame{
 		repaint();
 	}
 
-	
 	/**
 	 * affichage de la liste des joueurs
 	 * @throws RemoteException 
@@ -232,6 +234,10 @@ public class Menu extends JFrame{
 		int vitesse = JOptionPane.showOptionDialog(null, null, null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,  choixVitesse, choixVitesse[1]);
 		m_partie = new Partie(nombreJoueursMax, (4-vitesse)*15, m_joueur); 
 		// serveur --> ajouter la Partie et mettre le createur dans la partie
+		m_tronServeur.ajouterPartie(m_partie, m_joueur);
+		m_joueur.rejoindrePartie(m_partie);
+		m_joueursConnectes = m_tronServeur.getListeJoueurs(m_partie.getm_numero());
+		m_partiesCrees.add(m_partie);
 		
 		afficherListeJoueur();
 		afficherBoutonTerminerPartie();

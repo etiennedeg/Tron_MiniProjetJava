@@ -32,7 +32,8 @@ public class Serpent {
 	public Serpent(Joueur unJoueur, Partie unePartie){
 		m_joueur=unJoueur;
 		setPartie(unePartie);
-		m_numero=m_partie.getNombresJoueurs();
+		//m_numero=m_partie.getNombresJoueurs();
+		m_numero = unJoueur.getNumero();
 		m_couleur=ColorList.get(m_numero-1);
 		m_controle = new ControleKEY(this);
 		m_partie.getEcran().addKeyListener(m_controle);

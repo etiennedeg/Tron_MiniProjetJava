@@ -10,7 +10,9 @@ import tron.Partie;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -37,8 +39,8 @@ public class Ecran extends JFrame{
 	/**
 	 * Un buffer d'image de serpents 
 	 */
-	BufferedImage m_buffer;
-
+	transient BufferedImage m_buffer;
+	
 	/**
 	 * Constructeur
 	 * 
@@ -74,6 +76,7 @@ public class Ecran extends JFrame{
 		/** Configuration du buffer d'image de serpents */
 
 		m_buffer = new BufferedImage (getSize().width, getSize().height, BufferedImage.TYPE_INT_ARGB);
+		
 		JLabel affichage = new JLabel(new ImageIcon(m_buffer));
 		affichage.setOpaque(false);
 		affichage.setSize(getSize().width, getSize().height);

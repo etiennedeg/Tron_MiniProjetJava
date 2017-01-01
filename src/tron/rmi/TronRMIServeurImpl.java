@@ -17,7 +17,7 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Partie m_partie;
+	//private Partie m_partie;
 	ArrayList<Partie> m_listeDeParties;
 	ArrayList<ArrayList<Joueur>> m_listeDeJoueurs;
 	

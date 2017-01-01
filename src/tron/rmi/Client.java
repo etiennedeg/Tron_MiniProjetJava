@@ -15,20 +15,14 @@ import tron.ihm.Menu;
 //Permet a un utilisateur humain de passer des ordres par le réseau
 public class Client {
 	
-/* 	private Joueur joueur;
-	
-	private TronRMIServeur tronServeur;
-
-		public Client(Joueur j, TronRMIServeur t) {
-			joueur = j;
-			tronServeur = t;
-		}*/
 	private Menu m_menu;
-	private TronRMIServeur tronServeur;
+	private TronRMIServeur m_Serveur;
 	
 	public Client(TronRMIServeur unServeur) throws RemoteException{
-		tronServeur = unServeur;
+		m_Serveur = unServeur;
 		m_menu = new Menu();
+		m_menu.m_tronServeur = m_Serveur;
+		//m_menu.m_joueursConnectes = tronServeur.getListeJoueurs(unNumeroDePartie)
 	}
 
 		public static void main(String[] args) {			
