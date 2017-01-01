@@ -1,6 +1,8 @@
 package tron;
 
-public class PartieThread extends Thread{
+import java.io.Serializable;
+
+public class PartieThread extends Thread implements Serializable{
 
 	Partie m_partie;
 

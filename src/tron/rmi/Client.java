@@ -24,11 +24,13 @@ public class Client {
 			tronServeur = t;
 		}*/
 	private Menu m_menu;
-	private TronRMIServeur tronServeur;
+	private TronRMIServeur m_Serveur;
 	
 	public Client(TronRMIServeur unServeur) throws RemoteException{
-		tronServeur = unServeur;
+		m_Serveur = unServeur;
 		m_menu = new Menu();
+		m_menu.m_tronServeur = m_Serveur;
+		//m_menu.m_joueursConnectes = tronServeur.getListeJoueurs(unNumeroDePartie)
 	}
 
 		public static void main(String[] args) {			

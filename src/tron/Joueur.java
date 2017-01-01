@@ -1,6 +1,7 @@
 package tron;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.rmi.Naming;
@@ -18,7 +19,7 @@ import tron.rmi.TronRMIServeurImpl;
  * @author 
  *
  */
-public class Joueur {
+public class Joueur implements Serializable{
 
 	public static int NOMBREJOUEURSCREES = 0;
 

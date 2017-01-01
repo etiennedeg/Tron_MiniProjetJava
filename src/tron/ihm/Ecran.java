@@ -11,6 +11,7 @@ import tron.Partie;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * @since 1.0
  */
 @SuppressWarnings("serial")
-public class Ecran extends JFrame{
+public class Ecran extends JFrame implements Serializable{
 	
 	/**
 	 * L'objet contenant les informations d'une partie du jeu
@@ -37,7 +38,7 @@ public class Ecran extends JFrame{
 	/**
 	 * Un buffer d'image de serpents 
 	 */
-	BufferedImage m_buffer;
+	transient BufferedImage m_buffer;
 
 	/**
 	 * Constructeur

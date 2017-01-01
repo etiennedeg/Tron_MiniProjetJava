@@ -1,12 +1,13 @@
 package tron;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import tron.ihm.Ecran;
 
 
-public class Partie {
+public class Partie implements Serializable{
 
 	public static final int TAILLE_X = 104;
 	public static final int TAILLE_Y = 80;
@@ -26,6 +27,7 @@ public class Partie {
 	public Partie(int unNombreMaxJoueurs, int uneVitesse, Joueur unCreateur){
 		m_nombresDeManches = 0;
 		m_ecran = new Ecran(this);
+		//new Ecran(this);
 		m_partieThread = new PartieThread(this);
 		m_grille = new int[TAILLE_X][TAILLE_Y];
 		reinitialiserGrille();
@@ -70,7 +72,7 @@ public class Partie {
 					break;
 
 			}
-
+			m_ecran.setVisible(true);
 			jouerPartie();
 		//}
 	}
@@ -136,6 +138,9 @@ public class Partie {
 		return m_isPartieEnCours;
 	}
 
+	public void setm_createur(Joueur uncreateur){
+		m_createur = uncreateur;
+	}
 	public int getVitesse(){
 
 		return m_vitesse;
@@ -180,7 +185,7 @@ public class Partie {
 		joueur1.rejoindrePartie(partie);
 		Joueur joueur2 = new Joueur("Jean-Guy");
 		joueur2.rejoindrePartie(partie);
-		partie.m_ecran.setVisible(true);
+		//partie.m_ecran.setVisible(true);
 		partie.lancerPartie(); 
 
 	}
