@@ -63,7 +63,7 @@ public class Serpent {
 		if (m_partie.getGrille(x,y) == 0)
 		{
 			m_partie.setGrille(x,y,m_numero);
-			//m_partie.getEcran().editerBuff(m_numero, x, y);
+			m_partie.getEcran().editerBuff(m_numero, x, y);
 			return true;
 		}
 		else{

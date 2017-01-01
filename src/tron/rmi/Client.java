@@ -15,14 +15,6 @@ import tron.ihm.Menu;
 //Permet a un utilisateur humain de passer des ordres par le réseau
 public class Client {
 	
-/* 	private Joueur joueur;
-	
-	private TronRMIServeur tronServeur;
-
-		public Client(Joueur j, TronRMIServeur t) {
-			joueur = j;
-			tronServeur = t;
-		}*/
 	private Menu m_menu;
 	private TronRMIServeur m_Serveur;
 	
