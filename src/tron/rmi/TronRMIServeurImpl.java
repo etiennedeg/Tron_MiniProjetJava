@@ -18,13 +18,13 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	 */
 	private static final long serialVersionUID = 1L;
 	//private Partie m_partie;
-	ArrayList<Partie> m_listeDeParties;
+	private ArrayList<Partie> m_listeDeParties;
 	ArrayList<ArrayList<Joueur>> m_listeDeJoueurs;
 	
 	//Create the game
 	public TronRMIServeurImpl() throws RemoteException{
 		super();
-		m_listeDeParties = new ArrayList<Partie>();
+		setM_listeDeParties(new ArrayList<Partie>());
 		m_listeDeJoueurs = new ArrayList<ArrayList<Joueur>>();
 	}
 
@@ -39,14 +39,14 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	
 	public DefaultListModel<String> getListeParties()throws RemoteException{
 		DefaultListModel<String> modele = new DefaultListModel<String>();
-		for (int i=0; i<m_listeDeParties.size(); ++i){
-			modele.addElement(m_listeDeParties.get(i).getCreateur().getNom());
+		for (int i=0; i<getM_listeDeParties().size(); ++i){
+			modele.addElement(getM_listeDeParties().get(i).getCreateur().getNom());
 		}
 		return modele;
 	}
 	
 	public void ajouterPartie(Partie unePartie, Joueur unCreateur)throws RemoteException{
-		m_listeDeParties.add(unePartie);
+		getM_listeDeParties().add(unePartie);
 		m_listeDeJoueurs.add(new ArrayList<Joueur>());
 		m_listeDeJoueurs.get(m_listeDeJoueurs.size()-1).add(unCreateur);
 	}
@@ -83,6 +83,16 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 		} catch (RemoteException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+
+	public ArrayList<Partie> getM_listeDeParties() {
+		return m_listeDeParties;
+	}
+
+
+	public void setM_listeDeParties(ArrayList<Partie> m_listeDeParties) {
+		this.m_listeDeParties = m_listeDeParties;
 	}
 	
 	

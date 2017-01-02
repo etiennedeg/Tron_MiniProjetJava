@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import tron.Joueur;
 import tron.Partie;
 import tron.rmi.TronRMIServeur;
+import tron.rmi.TronRMIServeurImpl;
 
 /**
  * Menu du jeu
@@ -41,7 +42,7 @@ public class Menu extends JFrame{
 	/**
 	 * Le joueur actif 
 	 */
-	private Joueur m_joueur;
+	public Joueur m_joueur;
 	
 	/**
 	 * L'objet contenant les informations d'une partie du jeu
@@ -98,6 +99,7 @@ public class Menu extends JFrame{
 	 */
 	private JButton m_boutonQuitterPartie;
 	
+
 	/**
 	 * vaut 1 si on est sur le choix de la partie, 2 si on est sur l'attente de joueurs
 	 */
@@ -236,9 +238,9 @@ public class Menu extends JFrame{
 		int vitesse = JOptionPane.showOptionDialog(null, null, null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,  choixVitesse, choixVitesse[1]);
 		m_partie = new Partie(nombreJoueursMax, (4-vitesse)*15, m_joueur); 
 		// serveur --> ajouter la Partie et mettre le createur dans la partie
-		m_tronServeur.ajouterPartie(m_partie, m_joueur);
 		m_joueur.rejoindrePartie(m_partie);
-		m_joueursConnectes = m_tronServeur.getListeJoueurs(m_partie.getm_numero());
+		m_joueur.getObjetDistant().ajouterPartie(m_partie, m_joueur);
+		m_joueursConnectes = m_joueur.getObjetDistant().getListeJoueurs(m_partie.getm_numero());
 		m_partiesCrees.add(m_partie);
 		
 		afficherListeJoueur();
@@ -252,8 +254,12 @@ public class Menu extends JFrame{
 	 * @throws RemoteException 
 	 */
 	public void rejoindrePartie() throws RemoteException{
-		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );
+		m_partiesCrees = m_joueur.getObjetDistant().getM_listeDeParties();
+		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );	
+		m_joueur.rejoindrePartie(m_partie);
 		m_joueur.getObjetDistant().ajouterJoueur(m_listeParties.getAnchorSelectionIndex(), m_joueur);
+		m_joueursConnectes = m_joueur.getObjetDistant().getListeJoueurs(m_partie.getm_numero());
+		m_panelStart.removeAll();
 		afficherListeJoueur();
 		m_etatDuMenu = 2;
 		afficherBoutonQuitterPartie();
@@ -284,6 +290,12 @@ public class Menu extends JFrame{
 	 */
 	public void lancerPartie(){
 		setVisible(false);
+		try {
+			m_partie = m_joueur.getObjetDistant().getM_listeDeParties().get(0);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		m_partie.lancerPartie();
 	}
 	
