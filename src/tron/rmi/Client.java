@@ -21,7 +21,7 @@ public class Client {
 	public Client(TronRMIServeur unServeur) throws RemoteException{
 		m_Serveur = unServeur;
 		m_menu = new Menu();
-		m_menu.m_tronServeur = m_Serveur;
+		m_menu.m_joueur.setObjetDistant( m_Serveur);
 		//m_menu.m_joueursConnectes = tronServeur.getListeJoueurs(unNumeroDePartie)
 	}
 

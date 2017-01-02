@@ -112,4 +112,7 @@ public class Joueur implements Serializable{
 	public TronRMIServeur getObjetDistant()throws RemoteException{
 		return m_objetDistant;
 	}
+	public void setObjetDistant(TronRMIServeur unServeur) throws RemoteException{
+		m_objetDistant = unServeur;
+	}
 }

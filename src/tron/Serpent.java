@@ -1,11 +1,12 @@
 package tron;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Serpent {
+public class Serpent implements Serializable{
 
 	/**Pour definir un Serpent, et d��placer le serpent.
 	 * @author 
@@ -63,7 +64,8 @@ public class Serpent {
 		if (m_partie.getGrille(x,y) == 0)
 		{
 			m_partie.setGrille(x,y,m_numero);
-			m_partie.getEcran().editerBuff(m_numero, x, y);
+			m_partie.getEcran().repaint();
+			//m_partie.getEcran().editerBuff(m_numero, x, y);
 			return true;
 		}
 		else{
