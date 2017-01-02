@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import tron.Joueur;
 import tron.Partie;
 import tron.rmi.TronRMIServeur;
+import tron.rmi.TronRMIServeurImpl;
 
 /**
  * Menu du jeu
@@ -249,8 +250,11 @@ public class Menu extends JFrame{
 	 * @throws RemoteException 
 	 */
 	public void rejoindrePartie() throws RemoteException{
-		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );
+		m_partiesCrees = m_tronServeur.getM_listeDeParties();
+		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );		
 		m_joueur.getObjetDistant().ajouterJoueur(m_listeParties.getAnchorSelectionIndex(), m_joueur);
+		m_joueursConnectes = m_tronServeur.getListeJoueurs(m_partie.getm_numero());
+		m_panelStart.removeAll();
 		afficherListeJoueur();
 		afficherBoutonQuitterPartie();
 	}
