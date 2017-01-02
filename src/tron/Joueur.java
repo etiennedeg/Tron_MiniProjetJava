@@ -29,16 +29,14 @@ public class Joueur implements Serializable{
 	private int m_record;
 	private Serpent m_serpent;
 	private int m_numero;
-	private Menu m_menu;
 	
 	/**
 	 * Le constructeur de joueur
 	 * @param unNom   le nom du joueur
 	 */
-	public Joueur(String unNom, Menu menu){
+	public Joueur(String unNom){
 		m_nom = unNom;
 		m_record = 0;
-		m_menu = menu;
 		NOMBREJOUEURSCREES++;
 		m_numero = NOMBREJOUEURSCREES;
 		try {
@@ -114,13 +112,9 @@ public class Joueur implements Serializable{
 	public TronRMIServeur getObjetDistant()throws RemoteException{
 		return m_objetDistant;
 	}
-	
 
-	public Menu getMenu(){
-		return m_menu;
-	}
-	
 	public void setObjetDistant(TronRMIServeur unServeur) throws RemoteException{
 		m_objetDistant = unServeur;
 	}
+
 }

@@ -2,14 +2,13 @@ package tron;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.Serializable;
 
 /**
  * Class pour lire les commandement par clavier
  * @author ZHA Jierui
  *
  */
-public class ControleKEY implements KeyListener,Serializable{
+public class ControleKEY implements KeyListener{
 
 	Serpent m_serpent;
 	

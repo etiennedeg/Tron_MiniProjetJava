@@ -93,13 +93,13 @@ public class Ecran extends JFrame{
 		
 		/** dessiner les serpents */
 		
-		//unG = m_buffer.getGraphics();
+		unG = m_buffer.getGraphics();
 		
 		/** dessiner le bord de l'ecran  */
 		
 		unG.setColor(Color.gray);
 		unG.drawRect(m_MargeW,m_MargeH,5*this.m_partie.TAILLE_X,5*this.m_partie.TAILLE_Y);
-		for (int i=1 ; i < m_partie.TAILLE_X-1 ; i++){
+		/*for (int i=1 ; i < m_partie.TAILLE_X-1 ; i++){
 			for (int j=1 ; j < m_partie.TAILLE_Y-1 ; j++){
 				int k = m_partie.getGrille(i,j);
 				if (k != 0)	unG.setColor(m_partie.getSerpent(k).getCouleur());
@@ -107,7 +107,7 @@ public class Ecran extends JFrame{
 				else continue;
 				unG.fillRect(m_MargeW+i*5, m_MargeH+j*5, 5, 5);
 			}
-		}
+		}*/
 	}
 
 	/**
@@ -118,11 +118,11 @@ public class Ecran extends JFrame{
 	 * @param Y L'ordonnee de la position du tete de serpent 
 	 */
 		
-	/*public void editerBuff (int unNum, int X, int Y){
+	public void editerBuff (int unNum, int X, int Y){
 		Graphics g = m_buffer.getGraphics();
 		g.setColor(m_partie.getSerpent(unNum).getCouleur());
 		g.fillRect(m_MargeW + X * 5, m_MargeH + Y * 5, 5, 5);
 		g.dispose();
-	}*/
+	}
 
 }

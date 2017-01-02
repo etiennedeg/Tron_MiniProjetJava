@@ -42,7 +42,7 @@ public class Menu extends JFrame{
 	/**
 	 * Le joueur actif 
 	 */
-	public Joueur m_joueur;
+	private Joueur m_joueur;
 	
 	/**
 	 * L'objet contenant les informations d'une partie du jeu
@@ -99,23 +99,15 @@ public class Menu extends JFrame{
 	 */
 	private JButton m_boutonQuitterPartie;
 	
-
-	/**
-	 * vaut 1 si on est sur le choix de la partie, 2 si on est sur l'attente de joueurs
-	 */
-	private int m_etatDuMenu;
-	
 	public TronRMIServeur m_tronServeur;
-	
 
 
 	public Menu() throws RemoteException{
 		super("Tron");
 		
 		/** creer le joueur actif  */		
-		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"), this);
+		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"));
 		m_controle = new Controle(this, m_joueur);
-		m_etatDuMenu = 1;
 
 		/** construction d'image du fond  */
 		ImageIcon imgBack = new ImageIcon("data/serpent.png");
@@ -238,13 +230,12 @@ public class Menu extends JFrame{
 		int vitesse = JOptionPane.showOptionDialog(null, null, null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,  choixVitesse, choixVitesse[1]);
 		m_partie = new Partie(nombreJoueursMax, (4-vitesse)*15, m_joueur); 
 		// serveur --> ajouter la Partie et mettre le createur dans la partie
+		m_tronServeur.ajouterPartie(m_partie, m_joueur);
 		m_joueur.rejoindrePartie(m_partie);
-		m_joueur.getObjetDistant().ajouterPartie(m_partie, m_joueur);
-		m_joueursConnectes = m_joueur.getObjetDistant().getListeJoueurs(m_partie.getm_numero());
+		m_joueursConnectes = m_tronServeur.getListeJoueurs(m_partie.getm_numero());
 		m_partiesCrees.add(m_partie);
 		
 		afficherListeJoueur();
-		m_etatDuMenu = 2;
 		afficherBoutonTerminerPartie();
 		afficherBoutonStart();
 	}
@@ -254,14 +245,12 @@ public class Menu extends JFrame{
 	 * @throws RemoteException 
 	 */
 	public void rejoindrePartie() throws RemoteException{
-		m_partiesCrees = m_joueur.getObjetDistant().getM_listeDeParties();
-		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );	
-		m_joueur.rejoindrePartie(m_partie);
+		m_partiesCrees = m_tronServeur.getM_listeDeParties();
+		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );		
 		m_joueur.getObjetDistant().ajouterJoueur(m_listeParties.getAnchorSelectionIndex(), m_joueur);
-		m_joueursConnectes = m_joueur.getObjetDistant().getListeJoueurs(m_partie.getm_numero());
+		m_joueursConnectes = m_tronServeur.getListeJoueurs(m_partie.getm_numero());
 		m_panelStart.removeAll();
 		afficherListeJoueur();
-		m_etatDuMenu = 2;
 		afficherBoutonQuitterPartie();
 	}
 	
@@ -274,7 +263,6 @@ public class Menu extends JFrame{
 		
 		// serveur --> enlever le joueur de la partie
 		afficherListePartie();
-		m_etatDuMenu = 1;	
 	}
 
 	
@@ -290,12 +278,6 @@ public class Menu extends JFrame{
 	 */
 	public void lancerPartie(){
 		setVisible(false);
-		try {
-			m_partie = m_joueur.getObjetDistant().getM_listeDeParties().get(0);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		m_partie.lancerPartie();
 	}
 	
@@ -356,9 +338,5 @@ public class Menu extends JFrame{
 
 	}
 	
-	public int getEtatDuMenu(){
-		return m_etatDuMenu;
-	}
-
 }
 

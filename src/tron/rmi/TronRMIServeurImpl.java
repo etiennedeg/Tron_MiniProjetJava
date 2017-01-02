@@ -54,9 +54,7 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	public void ajouterJoueur(int unNumeroDePartie, Joueur unJoueur)throws RemoteException{
 		m_listeDeJoueurs.get(unNumeroDePartie).add(unJoueur);
 		for (int i=0; i<m_listeDeJoueurs.get(unNumeroDePartie).size(); ++i){
-			if (m_listeDeJoueurs.get(unNumeroDePartie).get(i).getMenu().getEtatDuMenu() == 2) {
-				m_listeDeJoueurs.get(unNumeroDePartie).get(i).getMenu().afficherListeJoueur();
-			}
+			
 		}
 	}
 
