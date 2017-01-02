@@ -14,8 +14,8 @@ import tron.rmi.TronRMIServeur;
 import tron.rmi.TronRMIServeurImpl;
 
 
-/**Pour definir un joueur
- * 
+/**
+ * Pour definir un joueur
  * @author 
  * 
  */
@@ -30,7 +30,7 @@ public class Joueur implements Serializable{
 	private int m_numero;
 
 	/**
-	 * 
+	 * Le constructeur de joueur
 	 * @param unNom   le nom du joueur
 	 */
 	public Joueur(String unNom){
@@ -59,6 +59,10 @@ public class Joueur implements Serializable{
 		m_serpent=uneSerpent;
 	}
 
+	/**
+	 * Get le serpent
+	 * @return le serpent associe au joueur
+	 */
 	public Serpent getSerpent(){
 		return m_serpent;
 	}
@@ -71,11 +75,16 @@ public class Joueur implements Serializable{
 		return m_record;
 	}
 
+	/**
+	 * Changer le record d'un joueur
+	 * @param uneRecord
+	 */
 	public void setRecord(int uneRecord){
 		m_record=uneRecord;
 	}
 	
-	/**Pour acceder a une partie antecedent, on cree un nouvel serpent
+	/**
+	 * Pour acceder a une partie antecedent, on cree un nouvel serpent
 	 * et l'associe au joueur et la partie.
 	 * @param unePartie la partie antecedent selectionne
 	 */
@@ -84,10 +93,18 @@ public class Joueur implements Serializable{
 		this.setSerpent(m_serpent);
 	}
 
+	/**
+	 * Obtenir le numero du serpent associe au joueur
+	 * @return le numero du serpent
+	 */
 	public int getNumero(){
 		return m_numero;
 	}
 
+	/**
+	 * Obtenir le nom du joueur
+	 * @return le nom du joueur
+	 */
 	public String getNom(){
 		return m_nom;
 	}

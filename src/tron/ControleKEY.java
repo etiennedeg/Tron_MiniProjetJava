@@ -3,6 +3,11 @@ package tron;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Class pour lire les commandement par clavier
+ * @author ZHA Jierui
+ *
+ */
 public class ControleKEY implements KeyListener{
 
 	Serpent m_serpent;
@@ -11,6 +16,9 @@ public class ControleKEY implements KeyListener{
 		m_serpent =  unSerpent;
 	}
 	
+	/**
+	 *Lire les nouvelles orientation par KeyPressed et change la orientation de serpent 
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
         int code=e.getKeyCode();
