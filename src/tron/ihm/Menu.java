@@ -51,7 +51,7 @@ public class Menu extends JFrame{
 	/**
 	 * Une liste des joueurs qui sont connecte au jeu   
 	 */
-	public DefaultListModel<String> m_joueursConnectes;
+	private DefaultListModel<String> m_joueursConnectes;
 	
 	/**
 	 * Une liste pour afficher les joueurs connectés 
@@ -98,20 +98,22 @@ public class Menu extends JFrame{
 	 */
 	private JButton m_boutonQuitterPartie;
 	
-	public TronRMIServeur m_tronServeur;
-
 	/**
-	 * Constructeur
-	 * @throws RemoteException 
+	 * vaut 1 si on est sur le choix de la partie, 2 si on est sur l'attente de joueurs
 	 */
+	private int m_etatDuMenu;
+	
+	public TronRMIServeur m_tronServeur;
+	
+
 
 	public Menu() throws RemoteException{
 		super("Tron");
 		
 		/** creer le joueur actif  */		
-		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"));
-		
+		m_joueur = new Joueur(JOptionPane.showInputDialog("Nom du joueur"), this);
 		m_controle = new Controle(this, m_joueur);
+		m_etatDuMenu = 1;
 
 		/** construction d'image du fond  */
 		ImageIcon imgBack = new ImageIcon("data/serpent.png");
@@ -138,7 +140,7 @@ public class Menu extends JFrame{
 	 * affichage de la liste de partie et affichage des boutons associes
 	 * @throws RemoteException 
 	 */
-	void afficherListePartie() throws RemoteException{
+	public void afficherListePartie() throws RemoteException{
 		m_panelStart.removeAll();
 		
 		//affichage de la liste de partie
@@ -171,7 +173,7 @@ public class Menu extends JFrame{
 	 * affichage de la liste des joueurs
 	 * @throws RemoteException 
 	 */
-	void afficherListeJoueur() throws RemoteException{
+	public void afficherListeJoueur() throws RemoteException{
 		//affichage de la liste des joueurs
 		m_nomsPartiesCrees = m_joueur.getObjetDistant().getListeParties();
 		m_listeJoueurs = new JList<String>();
@@ -189,7 +191,7 @@ public class Menu extends JFrame{
 	/**
 	 * affichage du bouton "start"
 	 */
-	void afficherBoutonStart(){
+	private void afficherBoutonStart(){
 		m_buttonStart = new JButton();
 		m_buttonStart.setIcon(new ImageIcon("data/start.png"));
 		m_buttonStart.setSize(210,210);
@@ -203,7 +205,7 @@ public class Menu extends JFrame{
 	/**
 	 * affichage du bouton "Quitter la partie"
 	 */
-	void afficherBoutonQuitterPartie(){
+	private void afficherBoutonQuitterPartie(){
 		m_boutonQuitterPartie = new JButton("Quitter la partie");
 		m_boutonQuitterPartie.setSize(300,30);
 		m_boutonQuitterPartie.setLocation(400,500);
@@ -214,7 +216,7 @@ public class Menu extends JFrame{
 	/**
 	 * affichage du bouton "Terminer la partie"
 	 */
-	void afficherBoutonTerminerPartie(){
+	private void afficherBoutonTerminerPartie(){
 		m_boutonTerminerPartie = new JButton("Terminer la partie");
 		m_boutonTerminerPartie.setSize(300,30);
 		m_boutonTerminerPartie.setLocation(400,650);
@@ -240,6 +242,7 @@ public class Menu extends JFrame{
 		m_partiesCrees.add(m_partie);
 		
 		afficherListeJoueur();
+		m_etatDuMenu = 2;
 		afficherBoutonTerminerPartie();
 		afficherBoutonStart();
 	}
@@ -252,6 +255,7 @@ public class Menu extends JFrame{
 		m_partie = m_partiesCrees.get( m_listeParties.getAnchorSelectionIndex() );
 		m_joueur.getObjetDistant().ajouterJoueur(m_listeParties.getAnchorSelectionIndex(), m_joueur);
 		afficherListeJoueur();
+		m_etatDuMenu = 2;
 		afficherBoutonQuitterPartie();
 	}
 	
@@ -264,6 +268,7 @@ public class Menu extends JFrame{
 		
 		// serveur --> enlever le joueur de la partie
 		afficherListePartie();
+		m_etatDuMenu = 1;	
 	}
 
 	
@@ -282,10 +287,7 @@ public class Menu extends JFrame{
 		m_partie.lancerPartie();
 	}
 	
-	/*public static void main (String[] args){
-		Menu menu = new Menu();
-		menu.setVisible(true);
-	}*/
+
 
 	
 	/**
@@ -340,6 +342,10 @@ public class Menu extends JFrame{
 			}
 		}
 
+	}
+	
+	public int getEtatDuMenu(){
+		return m_etatDuMenu;
 	}
 
 }

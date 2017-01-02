@@ -54,7 +54,9 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	public void ajouterJoueur(int unNumeroDePartie, Joueur unJoueur)throws RemoteException{
 		m_listeDeJoueurs.get(unNumeroDePartie).add(unJoueur);
 		for (int i=0; i<m_listeDeJoueurs.get(unNumeroDePartie).size(); ++i){
-			//repaintEcran
+			if (m_listeDeJoueurs.get(unNumeroDePartie).get(i).getMenu().getEtatDuMenu() == 2) {
+				m_listeDeJoueurs.get(unNumeroDePartie).get(i).getMenu().afficherListeJoueur();
+			}
 		}
 	}
 
@@ -70,12 +72,12 @@ public class TronRMIServeurImpl extends UnicastRemoteObject implements TronRMISe
 	public static void main(String[] args) {
 		try {
 			TronRMIServeurImpl p = new TronRMIServeurImpl();
-			/*Registry registry = LocateRegistry.createRegistry(1099);
+			Registry registry = LocateRegistry.createRegistry(1099);
 			if (args.length > 0) registry = LocateRegistry.getRegistry(1099);
-			else registry = LocateRegistry.getRegistry(1099);*/	
-			Registry registry;
+			else registry = LocateRegistry.getRegistry(1099);	
+			/*Registry registry;
 			if (args.length > 0) registry = LocateRegistry.getRegistry(args[0]);
-			else registry = LocateRegistry.getRegistry();
+			else registry = LocateRegistry.getRegistry();*/
 			registry.rebind("Partie", p);
 			System.out.println("La partie est bien enregistree");
 		} catch (RemoteException ex) {

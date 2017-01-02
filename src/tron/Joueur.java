@@ -1,6 +1,7 @@
 package tron;
 
 import java.awt.Color;
+import tron.ihm.Menu;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -28,19 +29,19 @@ public class Joueur implements Serializable{
 	private int m_record;
 	private Serpent m_serpent;
 	private int m_numero;
-
+	private Menu m_menu;
+	
 	/**
 	 * Le constructeur de joueur
 	 * @param unNom   le nom du joueur
 	 */
-	public Joueur(String unNom){
+	public Joueur(String unNom, Menu menu){
 		m_nom = unNom;
 		m_record = 0;
+		m_menu = menu;
 		NOMBREJOUEURSCREES++;
 		m_numero = NOMBREJOUEURSCREES;
 		try {
-			//Remote remote = Naming.lookup("rmi://00.0.0.00/TestRMI");
-			//m_objetDistant = (TronRMIServeur) remote;
 			m_objetDistant =(TronRMIServeur)LocateRegistry.getRegistry(1099).lookup("Partie");
 		/*} catch (MalformedURLException e) {
 			e.printStackTrace();*/
@@ -50,7 +51,8 @@ public class Joueur implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	/**
 	 * Associer un serpent a un joueur
 	 * @param uneSerpent
@@ -112,4 +114,10 @@ public class Joueur implements Serializable{
 	public TronRMIServeur getObjetDistant()throws RemoteException{
 		return m_objetDistant;
 	}
+	
+
+	public Menu getMenu(){
+		return m_menu;
+	}
+	
 }

@@ -32,7 +32,7 @@ public class Client {
 				else t = (TronRMIServeur)LocateRegistry.getRegistry(1099).lookup("Partie");
 				
 				Client client = new Client(t);
-				
+				Menu menu = new Menu();
 			} catch (RemoteException ex) {
 				ex.printStackTrace();
 			} catch (NotBoundException ex) {
